@@ -98,27 +98,8 @@ def main():
             )
             db.add(inr_pred)
             
-            # Save USD prediction (Converted)
-            usd_pred = Prediction(
-                prediction_date=today_date,
-                target_date=target_date,
-                predicted_price=round(p["predicted_price"] / usd_inr_rate, 2),
-                confidence_low_80=round(p["confidence_low_80"] / usd_inr_rate, 2),
-                confidence_high_80=round(p["confidence_high_80"] / usd_inr_rate, 2),
-                confidence_low_95=round(p["confidence_low_95"] / usd_inr_rate, 2),
-                confidence_high_95=round(p["confidence_high_95"] / usd_inr_rate, 2),
-                model_version="ensemble_v1",
-                prediction_method="ml",
-                features_used=json.dumps({
-                    "current_price": current_price / usd_inr_rate,
-                    "usd_inr_rate": usd_inr_rate,
-                    "date": latest_date.date().isoformat()
-                })
-            )
-            db.add(usd_pred)
-            
         db.commit()
-        logger.info(f"Successfully generated and saved 7-day ML forecasts for USD and INR.")
+        logger.info(f"Successfully generated and saved 7-day ML forecasts for INR.")
         logger.info("====================================")
         
     except Exception as e:

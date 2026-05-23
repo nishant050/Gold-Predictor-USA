@@ -122,7 +122,19 @@ def get_historical_prices(
     if limit:
         query = query.limit(limit)
         
-    return query.all()
+    results = query.all()
+    
+    # Scale GOLDBEES ETF (₹130 for 0.01g) to actual 24K Retail Spot Price per 1 Gram (~₹15,900)
+    INR_RETAIL_MULTIPLIER = 121.88
+    
+    if currency == "INR":
+        for r in results:
+            r.open = round(r.open * INR_RETAIL_MULTIPLIER, 2)
+            r.high = round(r.high * INR_RETAIL_MULTIPLIER, 2)
+            r.low = round(r.low * INR_RETAIL_MULTIPLIER, 2)
+            r.close = round(r.close * INR_RETAIL_MULTIPLIER, 2)
+            
+    return results
 
 @router.get("/chart-data")
 def get_chart_data(
@@ -157,11 +169,14 @@ def get_chart_data(
     if not prices:
         return {"dates": [], "open": [], "high": [], "low": [], "close": [], "volume": []}
         
+    INR_RETAIL_MULTIPLIER = 121.88
+    multiplier = INR_RETAIL_MULTIPLIER if currency == "INR" else 1.0
+        
     return {
         "dates": [p.date.isoformat() for p in prices],
-        "open": [round(p.open, 2) for p in prices],
-        "high": [round(p.high, 2) for p in prices],
-        "low": [round(p.low, 2) for p in prices],
-        "close": [round(p.close, 2) for p in prices],
+        "open": [round(p.open * multiplier, 2) for p in prices],
+        "high": [round(p.high * multiplier, 2) for p in prices],
+        "low": [round(p.low * multiplier, 2) for p in prices],
+        "close": [round(p.close * multiplier, 2) for p in prices],
         "volume": [p.volume for p in prices]
     }

@@ -263,29 +263,15 @@ def run_ml_forecasting_pipeline(db: Session | None = None):
         for p in blended_preds:
             target_date = today_date + timedelta(days=p["step"])
             
-            # Save INR
+            # Save INR natively without exchange rate mangling
             db.add(Prediction(
                 prediction_date=today_date,
                 target_date=target_date,
-                predicted_price=p["predicted_price"],
-                confidence_low_80=p["confidence_low_80"],
-                confidence_high_80=p["confidence_high_80"],
-                confidence_low_95=p["confidence_low_95"],
-                confidence_high_95=p["confidence_high_95"],
-                model_version="ensemble_v1",
-                prediction_method="ml",
-                features_used="{}"
-            ))
-            
-            # Save INR
-            db.add(Prediction(
-                prediction_date=today_date,
-                target_date=target_date,
-                predicted_price=round(p["predicted_price"] * rate, 2),
-                confidence_low_80=round(p["confidence_low_80"] * rate, 2),
-                confidence_high_80=round(p["confidence_high_80"] * rate, 2),
-                confidence_low_95=round(p["confidence_low_95"] * rate, 2),
-                confidence_high_95=round(p["confidence_high_95"] * rate, 2),
+                predicted_price=round(p["predicted_price"], 2),
+                confidence_low_80=round(p["confidence_low_80"], 2),
+                confidence_high_80=round(p["confidence_high_80"], 2),
+                confidence_low_95=round(p["confidence_low_95"], 2),
+                confidence_high_95=round(p["confidence_high_95"], 2),
                 model_version="ensemble_v1_inr",
                 prediction_method="ml",
                 features_used="{}"

@@ -71,7 +71,7 @@ export default function Home() {
 
   const usdPrices = latestData?.usd || {};
   const inrPrices = latestData?.inr || {};
-  const currentPrices = currency === 'USD' ? usdPrices : inrPrices;
+  const currentPrices = inrPrices;
   const isUp = currentPrices.change_24h_pct >= 0;
 
   const mlForecast = predictions?.ml_prediction?.daily_predictions || [];
@@ -92,24 +92,6 @@ export default function Home() {
           <h1 style={{ marginBottom: '0.25rem' }}>Gold Market Overview</h1>
           <p>Real-time analytics and predictive insights for gold commodities.</p>
         </div>
-        
-        {/* Currency Selector */}
-        <div style={{ display: 'flex', background: 'rgba(255, 215, 0, 0.04)', padding: '0.25rem', borderRadius: '10px', border: '1px solid var(--border-card)' }}>
-          <button 
-            className={`btn ${currency === 'INR' ? 'btn-primary' : 'btn-secondary'}`}
-            style={{ padding: '0.5rem 1rem', borderRadius: '8px' }}
-            onClick={() => setCurrency('INR')}
-          >
-            INR (₹)
-          </button>
-          <button 
-            className={`btn ${currency === 'USD' ? 'btn-primary' : 'btn-secondary'}`}
-            style={{ padding: '0.5rem 1rem', borderRadius: '8px', marginLeft: '0.25rem' }}
-            onClick={() => setCurrency('USD')}
-          >
-            USD ($)
-          </button>
-        </div>
       </div>
 
       {/* Hero Stats Grid */}
@@ -122,14 +104,14 @@ export default function Home() {
             <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>Updated daily</span>
           </div>
           <h1 style={{ fontSize: '3rem', fontWeight: 800, color: 'var(--text-primary)', marginBottom: '0.5rem' }}>
-            <AnimatedNumber value={currentPrices.price} prefix={currency === 'USD' ? '$' : '₹'} />
+            <AnimatedNumber value={currentPrices.price} prefix='₹' />
           </h1>
           <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
             <span style={{ color: isUp ? 'var(--bullish)' : 'var(--bearish)', fontWeight: 700, fontSize: '1.1rem' }}>
               {isUp ? '▲' : '▼'} {isUp ? '+' : ''}{currentPrices.change_24h_pct}%
             </span>
             <span style={{ color: 'var(--text-muted)', fontSize: '0.875rem' }}>
-              ({isUp ? '+' : ''}{currency === 'USD' ? '$' : '₹'}{currentPrices.change_24h?.toLocaleString()} 24h)
+              ({isUp ? '+' : ''}₹{currentPrices.change_24h?.toLocaleString()} 24h)
             </span>
           </div>
           <div style={{ display: 'flex', justifyContent: 'space-between', borderTop: '1px solid var(--border-card)', marginTop: '1.25rem', paddingTop: '0.75rem', fontSize: '0.85rem' }}>
@@ -155,13 +137,13 @@ export default function Home() {
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               <span style={{ color: 'var(--text-secondary)' }}>ML Ensemble Target:</span>
               <span style={{ fontWeight: 700, color: 'var(--bullish)', fontSize: '1.1rem' }}>
-                <AnimatedNumber value={latestMLForecastPrice} prefix={currency === 'USD' ? '$' : '₹'} />
+                <AnimatedNumber value={latestMLForecastPrice} prefix='₹' />
               </span>
             </div>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid var(--border-card)', paddingBottom: '0.75rem' }}>
               <span style={{ color: 'var(--text-secondary)' }}>LLM Analogy Target:</span>
               <span style={{ fontWeight: 700, color: 'var(--bullish)', fontSize: '1.1rem' }}>
-                <AnimatedNumber value={latestLLMForecastPrice} prefix={currency === 'USD' ? '$' : '₹'} />
+                <AnimatedNumber value={latestLLMForecastPrice} prefix='₹' />
               </span>
             </div>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: '0.85rem' }}>

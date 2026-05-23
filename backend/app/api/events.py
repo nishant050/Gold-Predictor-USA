@@ -41,9 +41,9 @@ def get_events(
             "title": ev.title,
             "description": ev.description,
             "impact_level": ev.impact_level,
-            "gold_price_at_event": round(ev.gold_price_at_event, 2) if ev.gold_price_at_event else None,
+            "impact_level": ev.impact_level,
+            "gold_price_at_event": round(ev.gold_price_at_event * 3.538, 2) if ev.gold_price_at_event else None,
             "gold_price_change_7d": round(ev.gold_price_change_7d, 2) if ev.gold_price_change_7d is not None else None,
-            "gold_price_change_30d": round(ev.gold_price_change_30d, 2) if ev.gold_price_change_30d is not None else None,
             "gold_price_change_90d": round(ev.gold_price_change_90d, 2) if ev.gold_price_change_90d is not None else None,
             "tags": json.loads(ev.tags) if ev.tags else [],
             "source": ev.source
@@ -79,10 +79,10 @@ def get_timeline(db: Session = Depends(get_db)):
             "date": ev.event_date.isoformat(),
             "title": ev.title,
             "type": ev.event_type,
+            "type": ev.event_type,
             "impact_level": ev.impact_level,
-            "gold_price": round(ev.gold_price_at_event, 2) if ev.gold_price_at_event else None,
+            "gold_price": round(ev.gold_price_at_event * 3.538, 2) if ev.gold_price_at_event else None,
             "gold_change_30d": change_30d,
-            "color": color_map.get(ev.event_type, "#64748b")
         })
     return timeline
 
@@ -142,7 +142,7 @@ def get_event_detail(event_id: int, db: Session = Depends(get_db)):
             "title": ev.title,
             "description": ev.description,
             "impact_level": ev.impact_level,
-            "gold_price_at_event": round(ev.gold_price_at_event, 2) if ev.gold_price_at_event else None,
+            "gold_price_at_event": round(ev.gold_price_at_event * 3.538, 2) if ev.gold_price_at_event else None,
             "gold_price_change_7d": round(ev.gold_price_change_7d, 2) if ev.gold_price_change_7d is not None else None,
             "gold_price_change_30d": round(ev.gold_price_change_30d, 2) if ev.gold_price_change_30d is not None else None,
             "gold_price_change_90d": round(ev.gold_price_change_90d, 2) if ev.gold_price_change_90d is not None else None,
@@ -150,7 +150,7 @@ def get_event_detail(event_id: int, db: Session = Depends(get_db)):
             "source": ev.source
         },
         "price_history": [
-            {"date": p.date.isoformat(), "price": round(p.close, 2)}
+            {"date": p.date.isoformat(), "price": round(p.close * 121.88, 2)}
             for p in price_history
         ]
     }

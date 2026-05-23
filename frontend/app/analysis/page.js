@@ -49,7 +49,7 @@ export default function AnalysisPage() {
       setChartLoading(true);
       try {
         // Fetch gold prices for selected period
-        const gold = await api.getChartData(period, 'USD');
+        const gold = await api.getChartData(period, 'INR');
         const goldHistoryArray = gold.dates.map((date, index) => ({
           date: date,
           close: gold.close[index]
@@ -187,7 +187,7 @@ export default function AnalysisPage() {
       <div style={{ marginBottom: '3.5rem' }}>
         <h3 style={{ marginBottom: '0.5rem' }}>20-Year Pearson Correlation Matrix</h3>
         <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', marginBottom: '1.5rem' }}>
-          Calculated Pearson coefficients measuring relationship strength to Gold USD Close. (+1.0 = moves together, -1.0 = moves in reverse).
+          Calculated Pearson coefficients measuring relationship strength to Gold INR Close. (+1.0 = moves together, -1.0 = moves in reverse).
         </p>
 
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1.25rem' }}>
@@ -213,7 +213,7 @@ export default function AnalysisPage() {
                     <span style={{ color: 'var(--text-muted)' }}>Latest: </span>
                     <span style={{ fontWeight: 600 }}>
                       {latestVal !== undefined ? latestVal.toLocaleString() : 'N/A'}
-                      {key === 'REAL_RATE' || key === 'FED_RATE' || key === 'TREASURY_10Y' ? '%' : ''}
+                      {key === 'REAL_RATE' || key === 'RBI_REPO_RATE' || key === 'INDIA_GOVT_BOND_10Y' ? '%' : ''}
                     </span>
                   </div>
                   <div style={{ 

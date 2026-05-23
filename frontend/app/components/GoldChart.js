@@ -238,7 +238,8 @@ export default function GoldChart({ historicalData, predictions, currency }) {
       gridcolor: 'rgba(255, 215, 0, 0.05)',
       tickcolor: 'rgba(255, 215, 0, 0.1)',
       font: { family: 'Inter, sans-serif', color: '#94a3b8' },
-      title: { text: `Price (${currency})`, font: { size: 12, color: '#94a3b8' } }
+      title: { text: `Price (${currency})`, font: { size: 12, color: '#94a3b8' } },
+      tickprefix: '₹'
     },
     legend: {
       font: { family: 'Inter, sans-serif', color: '#f8fafc', size: 11 },

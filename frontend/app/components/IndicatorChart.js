@@ -54,7 +54,7 @@ export default function IndicatorChart({ goldHistory, indicatorHistory, indicato
       y: goldCloses,
       type: 'scatter',
       mode: 'lines',
-      name: 'Gold Close (USD)',
+      name: 'Gold Close (INR)',
       line: { color: '#ffd700', width: 2 },
       yaxis: 'y1'
     },
@@ -82,7 +82,8 @@ export default function IndicatorChart({ goldHistory, indicatorHistory, indicato
       gridcolor: 'rgba(255, 215, 0, 0.03)',
       tickcolor: 'rgba(255, 215, 0, 0.1)',
       font: { family: 'Inter, sans-serif', color: '#ffd700' },
-      title: { text: 'Gold Price (USD)', font: { size: 12, color: '#ffd700' } },
+      title: { text: 'Gold Price (INR)', font: { size: 12, color: '#ffd700' } },
+      tickprefix: '₹',
       side: 'left'
     },
     yaxis2: {

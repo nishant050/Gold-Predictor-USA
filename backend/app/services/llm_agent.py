@@ -44,7 +44,8 @@ async def _call_openrouter_with_tools(db: Session, messages: list) -> dict:
             "messages": messages,
             "tools": LLM_TOOLS_SCHEMA,
             "tool_choice": "auto",
-            "temperature": 0.2
+            "temperature": 0.2,
+            "max_tokens": 3000
         }
         logger.info(f"Calling OpenRouter model: {model_name}")
         

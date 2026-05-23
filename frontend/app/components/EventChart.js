@@ -50,7 +50,7 @@ export default function EventChart({ priceHistory, eventDate, eventTitle }) {
       y: yData,
       type: 'scatter',
       mode: 'lines+markers',
-      name: 'Gold Close (USD)',
+      name: 'Gold Close (INR)',
       line: { color: '#ffd700', width: 2 },
       marker: { color: '#ffd700', size: 4 },
     }
@@ -69,7 +69,7 @@ export default function EventChart({ priceHistory, eventDate, eventTitle }) {
       gridcolor: 'rgba(255, 215, 0, 0.03)',
       tickcolor: 'rgba(255, 215, 0, 0.1)',
       font: { family: 'Inter, sans-serif', color: '#94a3b8', size: 9 },
-      tickformat: '$,.0f'
+      tickprefix: '₹'
     },
     shapes: [
       {

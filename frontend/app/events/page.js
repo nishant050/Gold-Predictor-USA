@@ -368,7 +368,7 @@ export default function EventsPage() {
                 <div>
                   <h4 style={{ marginBottom: '0.75rem', color: 'var(--text-primary)' }}>60-Day Price Window Surrounding Trigger</h4>
                   <p style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', marginBottom: '1rem' }}>
-                    Plotted daily gold closes (USD) from 30 days before event trigger to 30 days after.
+                    Plotted daily gold closes (INR) from 30 days before event trigger to 30 days after.
                   </p>
                   <EventChart 
                     priceHistory={eventDetail.price_history} 
