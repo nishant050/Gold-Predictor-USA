@@ -181,7 +181,7 @@ async def run_llm_gold_analysis(db: Session) -> dict:
         
         # Approximate confidence bands based on target confidence level
         # low = wide bands, high = narrow bands
-        vol_factor = {"low": 0.05, "medium": 0.03, "high": 0.015}[analysis["prediction"]["confidence"].lower()]
+        vol_factor = {"low": 0.05, "medium": 0.03, "high": 0.015}[analysis["prediction"].get("confidence_level", "medium").lower()]
         std_dev = pred_price * (vol_factor * (day / 7) ** 0.5)
         
         db_pred = Prediction(
