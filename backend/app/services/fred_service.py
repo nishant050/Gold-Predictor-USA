@@ -1,0 +1,189 @@
+from fredapi import Fred
+import pandas as pd
+from datetime import datetime, date, timedelta
+from sqlalchemy.orm import Session
+from app.models.schemas import EconomicIndicator
+from app.config import settings
+from app.utils.api_key_manager import get_active_key, mark_key_exhausted
+import time
+import logging
+
+logger = logging.getLogger(__name__)
+
+def fetch_all_indicators(db: Session, start_date: str = "1996-01-01") -> int:
+    """
+    Fetch specified FRED series and store as daily economic indicators in the database.
+    """
+    max_retries = 3
+    
+    series_mapping = {
+        "FEDFUNDS": ("FED_RATE", True),       # Monthly -> forward-fill
+        "DGS10": ("TREASURY_10Y", False),      # Daily
+        "CPIAUCSL": ("CPI", True),            # Monthly -> forward-fill
+        "DTWEXBGS": ("DXY_FRED", False),       # Daily
+        "M2SL": ("M2", True),                  # Monthly -> forward-fill
+        "GOLDPMGBD228NLBM": ("GOLD_FIX_FRED", False),  # Daily
+        "DFII10": ("TIPS_BREAKEVEN_10Y", False),      # Daily
+        "IRLTLT01USM156N": ("LONG_TERM_REAL_RATE", True),  # Monthly -> ffill
+        "BOGMBASE": ("MONETARY_BASE", True),            # Monthly -> ffill
+        "DCOILWTICO": ("OIL_WTI_FRED", False)          # Daily
+    }
+    
+    total_inserted = 0
+    
+    for series_id, (indicator_name, ffill) in series_mapping.items():
+        logger.info(f"Fetching indicator {indicator_name} ({series_id}) from FRED...")
+        
+        try:
+            retry_count = 0
+            success = False
+            series = None
+            
+            while retry_count < max_retries and not success:
+                api_key = get_active_key(db, "fred")
+                if not api_key:
+                    logger.error("No active FRED API key available.")
+                    break
+                    
+                fred = Fred(api_key=api_key)
+                try:
+                    series = fred.get_series(series_id, observation_start=start_date)
+                    success = True
+                except Exception as e:
+                    error_str = str(e).lower()
+                    if "429" in error_str or "rate limit" in error_str or "quota" in error_str:
+                        logger.warning(f"FRED API key exhausted: {e}")
+                        mark_key_exhausted(db, "fred", api_key)
+                        retry_count += 1
+                        time.sleep(1)
+                    else:
+                        logger.error(f"Error fetching FRED series {series_id}: {e}")
+                        break
+                        
+            if not success or series is None or series.empty:
+                logger.warning(f"No data returned for FRED series {series_id}")
+                continue
+                
+            df = pd.DataFrame(series, columns=["value"])
+            df.index.name = "date"
+            
+            # Drop NaN values
+            df = df.dropna()
+            
+            if ffill:
+                # Reindex to daily and forward fill to create daily rows
+                start_dt = df.index.min()
+                end_dt = datetime.today()
+                daily_index = pd.date_range(start=start_dt, end=end_dt, freq="D")
+                
+                df = df.reindex(daily_index)
+                df["value"] = df["value"].ffill()
+                df.index.name = "date"
+                df = df.dropna()
+                
+            df = df.reset_index()
+            
+            # Query existing dates
+            existing_dates = {
+                row[0] for row in db.query(EconomicIndicator.date).filter(EconomicIndicator.indicator_name == indicator_name).all()
+            }
+            
+            inserted = 0
+            for _, row in df.iterrows():
+                row_date = row['date']
+                if isinstance(row_date, pd.Timestamp):
+                    row_date = row_date.to_pydatetime().date()
+                elif isinstance(row_date, str):
+                    row_date = datetime.strptime(row_date, "%Y-%m-%d").date()
+                    
+                if row_date in existing_dates:
+                    continue
+                    
+                ind = EconomicIndicator(
+                    date=row_date,
+                    indicator_name=indicator_name,
+                    value=float(row['value']),
+                    source="FRED"
+                )
+                db.add(ind)
+                inserted += 1
+                
+                # Commit in chunks
+                if inserted % 500 == 0:
+                    db.commit()
+                    
+            db.commit()
+            logger.info(f"Inserted {inserted} rows for {indicator_name}.")
+            total_inserted += inserted
+            
+        except Exception as e:
+            logger.error(f"Error fetching/processing FRED series {series_id}: {e}")
+            
+    return total_inserted
+
+
+def compute_real_interest_rate(db: Session) -> int:
+    """
+    Calculate Real Rate = FED_RATE - CPI_YoY_change
+    CPI YoY: (CPI_today - CPI_12months_ago) / CPI_12months_ago * 100
+    Store as REAL_RATE in economic_indicators.
+    """
+    logger.info("Computing real interest rates...")
+    
+    # Query all FED_RATE and CPI daily values
+    fed_rates = db.query(EconomicIndicator.date, EconomicIndicator.value).filter(
+        EconomicIndicator.indicator_name == "FED_RATE"
+    ).order_by(EconomicIndicator.date).all()
+    
+    cpi_values = db.query(EconomicIndicator.date, EconomicIndicator.value).filter(
+        EconomicIndicator.indicator_name == "CPI"
+    ).order_by(EconomicIndicator.date).all()
+    
+    if not fed_rates or not cpi_values:
+        logger.warning("Missing FED_RATE or CPI data to compute REAL_RATE.")
+        return 0
+        
+    fed_df = pd.DataFrame(fed_rates, columns=["date", "fed_rate"]).set_index("date")
+    cpi_df = pd.DataFrame(cpi_values, columns=["date", "cpi"]).set_index("date")
+    
+    # Since our CPI series is daily (forward-filled), shifting by 365 corresponds to roughly 365 days ago.
+    cpi_df["cpi_prev_year"] = cpi_df["cpi"].shift(365)
+    cpi_df["cpi_yoy"] = ((cpi_df["cpi"] - cpi_df["cpi_prev_year"]) / cpi_df["cpi_prev_year"]) * 100
+    cpi_df = cpi_df.dropna()
+    
+    # Join FED_RATE and CPI YoY
+    combined = fed_df.join(cpi_df[["cpi_yoy"]], how="inner").dropna()
+    combined["real_rate"] = combined["fed_rate"] - combined["cpi_yoy"]
+    combined = combined.reset_index()
+    
+    existing_dates = {
+        row[0] for row in db.query(EconomicIndicator.date).filter(EconomicIndicator.indicator_name == "REAL_RATE").all()
+    }
+    
+    inserted = 0
+    for _, row in combined.iterrows():
+        row_date = row['date']
+        if isinstance(row_date, pd.Timestamp):
+            row_date = row_date.to_pydatetime().date()
+        elif isinstance(row_date, str):
+            row_date = datetime.strptime(row_date, "%Y-%m-%d").date()
+            
+        if row_date in existing_dates:
+            continue
+            
+        real_rate_val = float(row['real_rate'])
+        ind = EconomicIndicator(
+            date=row_date,
+            indicator_name="REAL_RATE",
+            value=real_rate_val,
+            source="computed"
+        )
+        db.add(ind)
+        inserted += 1
+        
+        if inserted % 500 == 0:
+            db.commit()
+            
+    db.commit()
+    logger.info(f"Successfully computed and inserted {inserted} REAL_RATE rows.")
+    return inserted

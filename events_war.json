@@ -1,0 +1,479 @@
+[
+  {
+    "event_date": "1996-03-08",
+    "event_type": "war",
+    "title": "Third Taiwan Strait Crisis",
+    "description": "China conducts missile tests near Taiwan, leading to the deployment of two US aircraft carrier groups to the region.",
+    "impact_level": 3,
+    "tags": ["geopolitical_crisis", "china", "taiwan", "us"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "1998-05-11",
+    "event_type": "war",
+    "title": "India Nuclear Tests (Pokhran-II)",
+    "description": "India conducts a series of nuclear bomb test explosions, prompting international sanctions.",
+    "impact_level": 3,
+    "tags": ["nuclear_test", "india", "sanctions"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "1998-08-07",
+    "event_type": "war",
+    "title": "US Embassy Bombings",
+    "description": "Al-Qaeda bombings of US embassies in Kenya and Tanzania.",
+    "impact_level": 2,
+    "tags": ["terrorism", "al_qaeda", "us", "embassy_attack"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "1998-12-16",
+    "event_type": "war",
+    "title": "Operation Desert Fox",
+    "description": "US and UK launch a four-day bombing campaign on Iraqi targets.",
+    "impact_level": 2,
+    "tags": ["military_conflict", "us", "uk", "iraq"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "1999-03-12",
+    "event_type": "war",
+    "title": "NATO 1999 Enlargement",
+    "description": "Hungary, Poland, and the Czech Republic join NATO.",
+    "impact_level": 1,
+    "tags": ["nato_expansion", "europe"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "1999-03-24",
+    "event_type": "war",
+    "title": "NATO Bombing of Yugoslavia",
+    "description": "NATO begins airstrikes against Yugoslavia during the Kosovo War.",
+    "impact_level": 3,
+    "tags": ["war", "nato", "yugoslavia", "balkans"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "1999-05-03",
+    "event_type": "war",
+    "title": "Kargil War",
+    "description": "Armed conflict between India and Pakistan in Kashmir.",
+    "impact_level": 2,
+    "tags": ["war", "india", "pakistan"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2000-09-28",
+    "event_type": "war",
+    "title": "Second Intifada Begins",
+    "description": "Intensified Israeli-Palestinian violence begins.",
+    "impact_level": 3,
+    "tags": ["conflict", "israel", "palestine", "middle_east"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2000-10-12",
+    "event_type": "war",
+    "title": "USS Cole Bombing",
+    "description": "Terrorist attack by al-Qaeda against the USS Cole in Yemen.",
+    "impact_level": 2,
+    "tags": ["terrorism", "us", "yemen", "al_qaeda"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2001-09-11",
+    "event_type": "war",
+    "title": "September 11 Attacks",
+    "description": "Coordinated terrorist attacks by al-Qaeda on the United States.",
+    "impact_level": 5,
+    "tags": ["terrorism", "us", "global_crisis"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2001-10-07",
+    "event_type": "war",
+    "title": "US Invasion of Afghanistan",
+    "description": "US and allied forces begin military operations in Afghanistan.",
+    "impact_level": 4,
+    "tags": ["war", "us", "afghanistan"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2003-03-20",
+    "event_type": "war",
+    "title": "US Invasion of Iraq",
+    "description": "US-led coalition invades Iraq to overthrow Saddam Hussein.",
+    "impact_level": 5,
+    "tags": ["war", "us", "iraq", "oil_shock"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2004-03-11",
+    "event_type": "war",
+    "title": "Madrid Train Bombings",
+    "description": "Bombings against commuter trains in Madrid.",
+    "impact_level": 2,
+    "tags": ["terrorism", "spain", "europe"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2004-03-29",
+    "event_type": "war",
+    "title": "NATO 2004 Enlargement",
+    "description": "Bulgaria, Estonia, Latvia, Lithuania, Romania, Slovakia, and Slovenia join NATO.",
+    "impact_level": 1,
+    "tags": ["nato_expansion", "europe"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2005-07-07",
+    "event_type": "war",
+    "title": "London Transit Bombings",
+    "description": "Coordinated terrorist attacks in London.",
+    "impact_level": 2,
+    "tags": ["terrorism", "uk", "europe"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2006-07-12",
+    "event_type": "war",
+    "title": "2006 Lebanon War",
+    "description": "Military conflict between Hezbollah and Israel.",
+    "impact_level": 3,
+    "tags": ["war", "israel", "lebanon"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2006-10-09",
+    "event_type": "war",
+    "title": "North Korea First Nuclear Test",
+    "description": "North Korea conducts its first nuclear weapon test.",
+    "impact_level": 3,
+    "tags": ["nuclear_test", "north_korea", "sanctions"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2007-04-27",
+    "event_type": "war",
+    "title": "Cyberattacks on Estonia",
+    "description": "Massive cyberattacks target Estonian critical infrastructure, widely attributed to Russia.",
+    "impact_level": 2,
+    "tags": ["cyber_attack", "estonia", "russia"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2007-09-06",
+    "event_type": "war",
+    "title": "Operation Orchard",
+    "description": "Israeli airstrike destroys a suspected nuclear reactor in Syria.",
+    "impact_level": 2,
+    "tags": ["airstrike", "israel", "syria"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2008-08-01",
+    "event_type": "war",
+    "title": "Russo-Georgian War",
+    "description": "War between Georgia and Russia over South Ossetia and Abkhazia.",
+    "impact_level": 3,
+    "tags": ["war", "russia", "georgia"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2010-03-26",
+    "event_type": "war",
+    "title": "Sinking of the ROKS Cheonan",
+    "description": "South Korean navy ship torpedoed by a North Korean submarine.",
+    "impact_level": 2,
+    "tags": ["military_conflict", "north_korea", "south_korea"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2010-06-01",
+    "event_type": "war",
+    "title": "Stuxnet Discovered",
+    "description": "A malicious computer worm, suspected to be US-Israeli, ruins Iranian nuclear centrifuges.",
+    "impact_level": 2,
+    "tags": ["cyber_attack", "iran", "israel", "us"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2010-12-17",
+    "event_type": "war",
+    "title": "Arab Spring Begins",
+    "description": "Protests in Tunisia spark a wave of revolutions and civil wars across the Arab world.",
+    "impact_level": 4,
+    "tags": ["revolution", "middle_east", "geopolitical_crisis"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2011-03-15",
+    "event_type": "war",
+    "title": "Syrian Civil War Begins",
+    "description": "Protests evolve into armed rebellion against the Assad government.",
+    "impact_level": 4,
+    "tags": ["civil_war", "syria", "middle_east"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2011-03-19",
+    "event_type": "war",
+    "title": "Military Intervention in Libya",
+    "description": "NATO-led coalition begins military intervention in Libya.",
+    "impact_level": 3,
+    "tags": ["war", "libya", "nato"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2011-05-02",
+    "event_type": "war",
+    "title": "Assassination of Osama bin Laden",
+    "description": "US forces kill the founder of al-Qaeda in Pakistan.",
+    "impact_level": 2,
+    "tags": ["assassination", "us", "pakistan", "terrorism"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2012-01-23",
+    "event_type": "war",
+    "title": "EU Embargo on Iranian Oil",
+    "description": "The EU adopts sanctions against Iran, including an oil embargo.",
+    "impact_level": 3,
+    "tags": ["sanctions", "iran", "eu", "oil_shock"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2012-09-11",
+    "event_type": "war",
+    "title": "Benghazi Attack",
+    "description": "Militants attack the US diplomatic compound in Benghazi, Libya.",
+    "impact_level": 2,
+    "tags": ["embassy_attack", "us", "libya"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2014-02-20",
+    "event_type": "war",
+    "title": "Russian Annexation of Crimea",
+    "description": "Russia invades and annexes the Crimean Peninsula from Ukraine. Leads to Western sanctions.",
+    "impact_level": 4,
+    "tags": ["invasion", "russia", "ukraine", "sanctions"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2014-06-04",
+    "event_type": "war",
+    "title": "ISIS Northern Iraq Offensive",
+    "description": "Islamic State forces launch a major offensive in Iraq, capturing Mosul.",
+    "impact_level": 3,
+    "tags": ["terrorism", "iraq", "isis"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2015-03-26",
+    "event_type": "war",
+    "title": "Saudi-led Intervention in Yemen",
+    "description": "Coalition led by Saudi Arabia launches military operations in Yemen.",
+    "impact_level": 3,
+    "tags": ["war", "yemen", "saudi_arabia"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2015-11-13",
+    "event_type": "war",
+    "title": "November 2015 Paris Attacks",
+    "description": "Coordinated terrorist attacks in Paris by ISIS.",
+    "impact_level": 2,
+    "tags": ["terrorism", "france", "isis"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2016-07-15",
+    "event_type": "war",
+    "title": "Turkish Coup d'état Attempt",
+    "description": "Faction within the Turkish military attempts to seize the government.",
+    "impact_level": 3,
+    "tags": ["coup", "turkey"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2017-04-07",
+    "event_type": "war",
+    "title": "Shayrat Missile Strike",
+    "description": "US launches Tomahawk missiles at Shayrat Airbase in Syria.",
+    "impact_level": 2,
+    "tags": ["missile_strike", "us", "syria"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2017-05-12",
+    "event_type": "war",
+    "title": "WannaCry Ransomware Attack",
+    "description": "Global cyberattack attributed to North Korea disrupts global systems.",
+    "impact_level": 2,
+    "tags": ["cyber_attack", "north_korea"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2017-09-03",
+    "event_type": "war",
+    "title": "North Korea Sixth Nuclear Test",
+    "description": "North Korea conducts a powerful nuclear test, severely escalating US tensions.",
+    "impact_level": 4,
+    "tags": ["nuclear_test", "north_korea", "geopolitical_crisis"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2018-05-08",
+    "event_type": "war",
+    "title": "US Withdrawal from JCPOA",
+    "description": "US unilaterally withdraws from the Iran Nuclear Deal and reinstates heavy sanctions.",
+    "impact_level": 3,
+    "tags": ["diplomatic_breakdown", "sanctions", "us", "iran"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2018-10-02",
+    "event_type": "war",
+    "title": "Assassination of Jamal Khashoggi",
+    "description": "Saudi journalist assassinated at the Saudi consulate in Istanbul.",
+    "impact_level": 2,
+    "tags": ["assassination", "saudi_arabia", "turkey"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2019-02-26",
+    "event_type": "war",
+    "title": "Balakot Airstrike",
+    "description": "Indian warplanes bomb alleged terrorist camps in Pakistan, causing a major border standoff.",
+    "impact_level": 2,
+    "tags": ["airstrike", "india", "pakistan"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2019-09-14",
+    "event_type": "war",
+    "title": "Abqaiq-Khurais Attack",
+    "description": "Drone attacks on Saudi Aramco oil facilities, disrupting 5% of global oil supply.",
+    "impact_level": 4,
+    "tags": ["drone_strike", "saudi_arabia", "oil_shock", "iran"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2020-01-03",
+    "event_type": "war",
+    "title": "Assassination of Qasem Soleimani",
+    "description": "US drone strike kills Iranian major general Qasem Soleimani in Baghdad.",
+    "impact_level": 4,
+    "tags": ["assassination", "drone_strike", "us", "iran"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2020-06-15",
+    "event_type": "war",
+    "title": "Galwan Valley Skirmish",
+    "description": "Deadly hand-to-hand clashes between Indian and Chinese troops.",
+    "impact_level": 3,
+    "tags": ["border_skirmish", "india", "china"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2020-12-13",
+    "event_type": "war",
+    "title": "SolarWinds Cyberattack Discovered",
+    "description": "Massive cyber espionage campaign attributed to Russia affects thousands of global organizations and US government agencies.",
+    "impact_level": 2,
+    "tags": ["cyber_attack", "russia", "us"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2021-08-15",
+    "event_type": "war",
+    "title": "Fall of Kabul",
+    "description": "Taliban captures Kabul as US forces withdraw from Afghanistan.",
+    "impact_level": 3,
+    "tags": ["geopolitical_crisis", "afghanistan", "us", "taliban"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2022-02-24",
+    "event_type": "war",
+    "title": "Russian Invasion of Ukraine",
+    "description": "Russia launches a full-scale invasion of Ukraine, causing massive global sanctions and market shocks.",
+    "impact_level": 5,
+    "tags": ["war", "russia", "ukraine", "global_crisis", "sanctions"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2022-08-02",
+    "event_type": "war",
+    "title": "Pelosi Visit to Taiwan",
+    "description": "US House Speaker visits Taiwan, prompting massive Chinese military drills encircling the island.",
+    "impact_level": 3,
+    "tags": ["diplomatic_breakdown", "us", "china", "taiwan"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2022-09-26",
+    "event_type": "war",
+    "title": "Nord Stream Pipeline Sabotage",
+    "description": "Bombings damage the Nord Stream 1 and 2 natural gas pipelines in the Baltic Sea.",
+    "impact_level": 3,
+    "tags": ["sabotage", "infrastructure_attack", "russia", "europe"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2023-04-04",
+    "event_type": "war",
+    "title": "NATO 2023 Enlargement",
+    "description": "Finland officially joins NATO, doubling the alliance's border with Russia.",
+    "impact_level": 2,
+    "tags": ["nato_expansion", "finland", "russia"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2023-10-07",
+    "event_type": "war",
+    "title": "Hamas Attack on Israel",
+    "description": "Hamas launches coordinated assault on Israel, triggering the Israel-Hamas War.",
+    "impact_level": 4,
+    "tags": ["war", "terrorism", "israel", "gaza"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2023-11-19",
+    "event_type": "war",
+    "title": "Houthi Red Sea Attacks Begin",
+    "description": "Houthi movement begins attacking commercial shipping in the Red Sea.",
+    "impact_level": 3,
+    "tags": ["military_conflict", "houthis", "red_sea", "trade_disruption"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2024-01-16",
+    "event_type": "war",
+    "title": "Iran-Pakistan Border Skirmishes",
+    "description": "Iran and Pakistan exchange missile strikes against alleged militant bases in each other's territory.",
+    "impact_level": 2,
+    "tags": ["missile_strike", "border_skirmish", "iran", "pakistan"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2024-03-07",
+    "event_type": "war",
+    "title": "NATO 2024 Enlargement",
+    "description": "Sweden officially joins NATO.",
+    "impact_level": 2,
+    "tags": ["nato_expansion", "sweden", "russia"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2024-04-13",
+    "event_type": "war",
+    "title": "Iranian Strikes on Israel",
+    "description": "Iran launches hundreds of drones and missiles directly at Israel in retaliation.",
+    "impact_level": 4,
+    "tags": ["missile_strike", "iran", "israel"],
+    "source": "agent_research"
+  }
+]

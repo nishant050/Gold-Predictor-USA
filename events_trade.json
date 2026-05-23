@@ -1,0 +1,434 @@
+[
+  {
+    "event_date": "1996-11-05",
+    "event_type": "politics",
+    "title": "US Presidential Election 1996",
+    "description": "Bill Clinton re-elected as US President, maintaining political continuity.",
+    "impact_level": 1,
+    "tags": ["us_election", "us"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2000-11-07",
+    "event_type": "politics",
+    "title": "US Presidential Election 2000",
+    "description": "George W. Bush wins a contested election against Al Gore after Supreme Court intervention, causing some market uncertainty.",
+    "impact_level": 3,
+    "tags": ["us_election", "us"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2001-12-11",
+    "event_type": "trade",
+    "title": "China Joins WTO",
+    "description": "China officially becomes a member of the World Trade Organization, integrating into the global economy and altering global supply chains.",
+    "impact_level": 3,
+    "tags": ["wto", "china", "trade"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2004-11-02",
+    "event_type": "politics",
+    "title": "US Presidential Election 2004",
+    "description": "George W. Bush re-elected as US President.",
+    "impact_level": 1,
+    "tags": ["us_election", "us"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2008-11-04",
+    "event_type": "politics",
+    "title": "US Presidential Election 2008",
+    "description": "Barack Obama elected as US President during the Global Financial Crisis.",
+    "impact_level": 4,
+    "tags": ["us_election", "us"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2010-07-21",
+    "event_type": "regulation",
+    "title": "Dodd-Frank Act",
+    "description": "Obama signs the Dodd-Frank Wall Street Reform and Consumer Protection Act, tightening financial regulations.",
+    "impact_level": 3,
+    "tags": ["regulation", "finance", "us"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2011-08-02",
+    "event_type": "politics",
+    "title": "2011 US Debt Ceiling Crisis",
+    "description": "Budget Control Act passed after a standoff that led to the first-ever downgrade of the US credit rating, sparking a major gold rally.",
+    "impact_level": 5,
+    "tags": ["debt_ceiling", "us", "fiscal"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2012-11-06",
+    "event_type": "politics",
+    "title": "US Presidential Election 2012",
+    "description": "Barack Obama re-elected as US President.",
+    "impact_level": 2,
+    "tags": ["us_election", "us"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2013-10-01",
+    "event_type": "politics",
+    "title": "2013 US Government Shutdown",
+    "description": "A 16-day federal government shutdown due to disputes over the Affordable Care Act funding.",
+    "impact_level": 3,
+    "tags": ["shutdown", "us"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2014-05-26",
+    "event_type": "politics",
+    "title": "Narendra Modi Takes Office (India)",
+    "description": "Narendra Modi becomes Prime Minister of India, introducing pro-business economic reforms.",
+    "impact_level": 2,
+    "tags": ["election", "india"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2016-06-23",
+    "event_type": "politics",
+    "title": "Brexit Referendum",
+    "description": "The UK votes to leave the European Union, causing massive shockwaves in global markets and a flight to safety (gold).",
+    "impact_level": 5,
+    "tags": ["brexit", "eu", "uk"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2016-11-08",
+    "event_type": "politics",
+    "title": "US Presidential Election 2016",
+    "description": "Donald Trump elected as US President, promising trade protectionism and America First policies.",
+    "impact_level": 4,
+    "tags": ["us_election", "us"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2017-01-23",
+    "event_type": "trade",
+    "title": "US Withdraws from TPP",
+    "description": "President Trump signs an executive order withdrawing the US from the Trans-Pacific Partnership.",
+    "impact_level": 3,
+    "tags": ["tpp", "trade", "us"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2017-03-29",
+    "event_type": "politics",
+    "title": "UK Triggers Article 50",
+    "description": "The UK formally initiates the process of withdrawing from the EU.",
+    "impact_level": 3,
+    "tags": ["brexit", "eu", "uk"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2017-12-22",
+    "event_type": "regulation",
+    "title": "Tax Cuts and Jobs Act (TCJA)",
+    "description": "Major US tax reform signed by Donald Trump, significantly lowering the corporate tax rate.",
+    "impact_level": 3,
+    "tags": ["tax", "fiscal", "us"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2018-01-22",
+    "event_type": "trade",
+    "title": "US Tariffs on Solar Panels and Washing Machines",
+    "description": "First major tariffs of the Trump administration, beginning the global trade wars.",
+    "impact_level": 2,
+    "tags": ["tariffs", "trade_war", "us"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2018-03-22",
+    "event_type": "trade",
+    "title": "US Section 301 Tariffs Announced",
+    "description": "Trump signs a memorandum directing tariffs on $50 billion of Chinese goods.",
+    "impact_level": 4,
+    "tags": ["tariffs", "trade_war", "us", "china"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2018-07-06",
+    "event_type": "trade",
+    "title": "First Round of US-China Tariffs",
+    "description": "US implements 25% tariffs on $34 billion of Chinese imports. China retaliates.",
+    "impact_level": 4,
+    "tags": ["tariffs", "trade_war", "us", "china"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2018-08-23",
+    "event_type": "trade",
+    "title": "Second Round of US-China Tariffs",
+    "description": "US implements 25% tariffs on an additional $16 billion of Chinese imports.",
+    "impact_level": 3,
+    "tags": ["tariffs", "trade_war", "us", "china"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2018-09-24",
+    "event_type": "trade",
+    "title": "Third Round of US-China Tariffs",
+    "description": "US imposes 10% tariffs on $200 billion of Chinese imports.",
+    "impact_level": 4,
+    "tags": ["tariffs", "trade_war", "us", "china"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2018-09-30",
+    "event_type": "trade",
+    "title": "USMCA Agreement Reached",
+    "description": "US, Mexico, and Canada agree to a new trade deal to replace NAFTA.",
+    "impact_level": 3,
+    "tags": ["nafta", "usmca", "trade"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2018-10-28",
+    "event_type": "politics",
+    "title": "Jair Bolsonaro Elected (Brazil)",
+    "description": "Right-wing candidate Jair Bolsonaro wins the Brazilian presidential election.",
+    "impact_level": 2,
+    "tags": ["election", "brazil"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2018-12-22",
+    "event_type": "politics",
+    "title": "2018-2019 US Government Shutdown",
+    "description": "Start of a 35-day government shutdown over border wall funding.",
+    "impact_level": 3,
+    "tags": ["shutdown", "us"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2019-05-10",
+    "event_type": "trade",
+    "title": "US Increases Tariffs on China",
+    "description": "US increases tariffs on $200 billion of Chinese goods from 10% to 25%.",
+    "impact_level": 4,
+    "tags": ["tariffs", "trade_war", "us", "china"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2019-05-26",
+    "event_type": "politics",
+    "title": "2019 European Parliament Election",
+    "description": "Elections across the EU show a fragmented parliament but pro-EU majority holds.",
+    "impact_level": 2,
+    "tags": ["election", "eu"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2019-09-01",
+    "event_type": "trade",
+    "title": "Fourth Round of US-China Tariffs (List 4A)",
+    "description": "US imposes 15% tariffs on $112 billion of Chinese goods. China retaliates with tariffs on US crude oil.",
+    "impact_level": 4,
+    "tags": ["tariffs", "trade_war", "us", "china"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2020-01-15",
+    "event_type": "trade",
+    "title": "US-China Phase One Trade Deal",
+    "description": "US and China sign an agreement to pause the trade war and roll back some tariffs.",
+    "impact_level": 4,
+    "tags": ["trade_deal", "trade_war", "us", "china"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2020-01-31",
+    "event_type": "politics",
+    "title": "Brexit Day",
+    "description": "The UK officially leaves the European Union, entering a transition period.",
+    "impact_level": 4,
+    "tags": ["brexit", "eu", "uk"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2020-03-27",
+    "event_type": "regulation",
+    "title": "CARES Act",
+    "description": "US passes $2.2 trillion stimulus package in response to COVID-19, driving major fiscal expansion.",
+    "impact_level": 5,
+    "tags": ["stimulus", "fiscal", "us"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2020-07-01",
+    "event_type": "trade",
+    "title": "USMCA Enters into Force",
+    "description": "The United States-Mexico-Canada Agreement officially replaces NAFTA.",
+    "impact_level": 2,
+    "tags": ["usmca", "trade"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2020-11-03",
+    "event_type": "politics",
+    "title": "US Presidential Election 2020",
+    "description": "Joe Biden elected as US President.",
+    "impact_level": 4,
+    "tags": ["us_election", "us"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2020-11-15",
+    "event_type": "trade",
+    "title": "RCEP Signed",
+    "description": "Regional Comprehensive Economic Partnership signed by 15 Asia-Pacific nations, creating the world's largest free trade bloc.",
+    "impact_level": 3,
+    "tags": ["rcep", "trade", "asia"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2020-12-24",
+    "event_type": "trade",
+    "title": "UK-EU Trade and Cooperation Agreement",
+    "description": "Post-Brexit trade deal agreed between the UK and EU just days before the deadline.",
+    "impact_level": 4,
+    "tags": ["brexit", "trade", "eu", "uk"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2021-03-11",
+    "event_type": "regulation",
+    "title": "American Rescue Plan Act",
+    "description": "$1.9 trillion stimulus package passed by the Biden administration.",
+    "impact_level": 4,
+    "tags": ["stimulus", "fiscal", "us"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2022-08-16",
+    "event_type": "regulation",
+    "title": "Inflation Reduction Act",
+    "description": "Significant US climate, tax, and healthcare bill signed into law.",
+    "impact_level": 3,
+    "tags": ["fiscal", "tax", "us"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2022-10-30",
+    "event_type": "politics",
+    "title": "Lula Elected (Brazil)",
+    "description": "Luiz Inácio Lula da Silva wins the Brazilian presidential election, defeating Jair Bolsonaro.",
+    "impact_level": 2,
+    "tags": ["election", "brazil"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2023-05-28",
+    "event_type": "politics",
+    "title": "Recep Tayyip Erdogan Re-elected (Turkey)",
+    "description": "Erdogan secures another term, affecting Turkish monetary policy and lira stability.",
+    "impact_level": 3,
+    "tags": ["election", "turkey"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2023-06-03",
+    "event_type": "politics",
+    "title": "Fiscal Responsibility Act of 2023",
+    "description": "Bill passed to suspend the US debt ceiling and avoid a sovereign default.",
+    "impact_level": 4,
+    "tags": ["debt_ceiling", "us", "fiscal"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2024-01-10",
+    "event_type": "regulation",
+    "title": "SEC Approves Spot Bitcoin ETFs",
+    "description": "US SEC officially approves 11 spot Bitcoin ETFs, a landmark regulatory shift for crypto competing with gold.",
+    "impact_level": 3,
+    "tags": ["crypto", "regulation", "us"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2024-06-02",
+    "event_type": "politics",
+    "title": "Claudia Sheinbaum Elected (Mexico)",
+    "description": "Sheinbaum wins a landslide victory, ensuring continuity of Morena party policies.",
+    "impact_level": 2,
+    "tags": ["election", "mexico"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2024-06-04",
+    "event_type": "politics",
+    "title": "Narendra Modi Wins Third Term (India)",
+    "description": "Modi secures a third term but with a reduced majority, relying on coalition partners.",
+    "impact_level": 2,
+    "tags": ["election", "india"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2024-06-09",
+    "event_type": "politics",
+    "title": "2024 European Parliament Election",
+    "description": "Right-wing parties make significant gains in EU parliament elections.",
+    "impact_level": 3,
+    "tags": ["election", "eu"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2024-11-05",
+    "event_type": "politics",
+    "title": "US Presidential Election 2024",
+    "description": "Donald Trump wins the 2024 presidential election, securing a second non-consecutive term.",
+    "impact_level": 5,
+    "tags": ["us_election", "us", "trump"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2025-01-20",
+    "event_type": "politics",
+    "title": "Trump 2025 Inauguration",
+    "description": "Donald Trump sworn in, immediately initiating sweeping executive orders on trade and deregulation.",
+    "impact_level": 4,
+    "tags": ["politics", "us", "trump"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2025-02-01",
+    "event_type": "trade",
+    "title": "Trump Announces Baseline Universal Tariffs",
+    "description": "Trump administration formally announces baseline 10-20% tariffs on all imported goods.",
+    "impact_level": 5,
+    "tags": ["tariffs", "trade_war", "us", "trump"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2025-03-15",
+    "event_type": "trade",
+    "title": "Trump Announces 60% Tariffs on China",
+    "description": "Severe escalation in the US-China trade war with sweeping 60% tariffs implemented on Chinese imports.",
+    "impact_level": 5,
+    "tags": ["tariffs", "trade_war", "us", "china", "trump"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2025-08-01",
+    "event_type": "trade",
+    "title": "US Reciprocal Trade Act Enforcement",
+    "description": "US begins heavily enforcing reciprocal tariffs on countries with trade surpluses against the US.",
+    "impact_level": 4,
+    "tags": ["tariffs", "trade", "us", "trump"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2025-10-15",
+    "event_type": "regulation",
+    "title": "Comprehensive Crypto Deregulation Framework",
+    "description": "Passage of major pro-crypto regulatory framework in the US, altering the safe-haven dynamic between gold and digital assets.",
+    "impact_level": 4,
+    "tags": ["crypto", "regulation", "us", "trump"],
+    "source": "agent_research"
+  }
+]

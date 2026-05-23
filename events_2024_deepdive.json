@@ -1,0 +1,236 @@
+[
+  {
+    "event_date": "2024-01-31",
+    "event_type": "central_bank",
+    "title": "China PBOC Extends Gold Buying Streak",
+    "description": "The People's Bank of China continued its gold accumulation for the 15th consecutive month, tightening physical supply in Asian markets.",
+    "impact_level": 3,
+    "tags": ["PBOC", "China", "central bank"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2024-02-15",
+    "event_type": "economic",
+    "title": "US Commercial Real Estate Crisis Fears Spike",
+    "description": "Rising delinquencies in the US commercial real estate sector pressured regional banks, triggering a flight to safety that mildly supported gold prices.",
+    "impact_level": 3,
+    "tags": ["CRE", "US economy", "safe haven", "regional banks"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2024-03-20",
+    "event_type": "monetary_policy",
+    "title": "FOMC Maintains Rates, Dot Plot Signals Future Cuts",
+    "description": "The Federal Reserve held rates steady but the updated dot plot indicated three rate cuts for 2024, providing a strong macroeconomic tailwind for gold.",
+    "impact_level": 4,
+    "tags": ["Fed", "FOMC", "rates", "dot plot"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2024-04-13",
+    "event_type": "geopolitics",
+    "title": "Iran-Israel Direct Confrontation",
+    "description": "Unprecedented direct military confrontation between Iran and Israel escalated rapidly, sending shockwaves through markets and driving a massive safe-haven bid for gold.",
+    "impact_level": 5,
+    "tags": ["Iran", "Israel", "geopolitics", "Middle East"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2024-06-06",
+    "event_type": "monetary_policy",
+    "title": "ECB Initiates Easing Cycle",
+    "description": "The European Central Bank cut interest rates, officially initiating the global easing cycle before the Fed and boosting non-yielding assets globally.",
+    "impact_level": 3,
+    "tags": ["ECB", "monetary policy", "Europe", "rate cut"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2024-07-25",
+    "event_type": "central_bank",
+    "title": "India RBI Heavy Purchasing and Repatriation",
+    "description": "The Reserve Bank of India repatriated over 100 tonnes of gold from the UK to domestic vaults while continuing aggressive open market purchases.",
+    "impact_level": 4,
+    "tags": ["RBI", "India", "repatriation", "central bank"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2024-08-23",
+    "event_type": "monetary_policy",
+    "title": "Powell's Dovish Jackson Hole Pivot",
+    "description": "Fed Chair Jerome Powell definitively stated that 'the time has come for policy to adjust', practically cementing a September rate cut and driving gold higher.",
+    "impact_level": 5,
+    "tags": ["Powell", "Jackson Hole", "dovish", "Fed"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2024-09-18",
+    "event_type": "monetary_policy",
+    "title": "Fed Delivers Jumbo 50 Bps Rate Cut",
+    "description": "The Federal Reserve kicked off its easing cycle with an aggressive 50 basis point cut, citing a cooling labor market, which pushed gold to new all-time highs.",
+    "impact_level": 5,
+    "tags": ["Fed cut", "FOMC", "jumbo cut", "interest rates"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2024-10-22",
+    "event_type": "de_dollarization",
+    "title": "BRICS Summit Kazan: Payment System Progress",
+    "description": "At the Kazan summit, BRICS nations announced significant progress on a non-USD cross-border payment system, accelerating de-dollarization fears.",
+    "impact_level": 4,
+    "tags": ["BRICS", "de-dollarization", "currency", "Russia"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2024-11-06",
+    "event_type": "geopolitics",
+    "title": "Donald Trump Wins 2024 US Election",
+    "description": "Donald Trump secured the US presidency, sparking immediate market repricing regarding future trade policy, deficit spending, and geopolitical alignments.",
+    "impact_level": 5,
+    "tags": ["US Election", "Trump", "uncertainty", "US politics"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2024-11-20",
+    "event_type": "de_dollarization",
+    "title": "Saudi Arabia & China Expand Bilateral Currency Agreements",
+    "description": "Saudi Arabia and China finalized major bilateral trade agreements allowing increased oil settlements in Yuan, functionally bypassing the USD and threatening the petrodollar system.",
+    "impact_level": 4,
+    "tags": ["petrodollar", "Saudi Arabia", "China", "bilateral trade"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2024-12-15",
+    "event_type": "economic",
+    "title": "US Fiscal Deficits Fuel Debt Crisis Fears",
+    "description": "The US national debt accelerated at an unprecedented rate toward year-end, fueling deep institutional concerns over long-term fiscal sustainability and debasement.",
+    "impact_level": 4,
+    "tags": ["US debt", "fiscal deficit", "debasement"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2025-01-20",
+    "event_type": "geopolitics",
+    "title": "Trump Inauguration and Trade Rhetoric",
+    "description": "The new US administration immediately signaled intentions to aggressively renegotiate global trade agreements and impose tariffs, spooking equity markets and driving safe-haven flows.",
+    "impact_level": 3,
+    "tags": ["inauguration", "trade policy", "Trump"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2025-02-18",
+    "event_type": "economic",
+    "title": "China Unleashes Massive Economic Stimulus",
+    "description": "Facing severe economic headwinds, Beijing announced a multitrillion-yuan stimulus package aimed at infrastructure and domestic consumption, boosting industrial and precious metals.",
+    "impact_level": 5,
+    "tags": ["China stimulus", "economic growth", "liquidity"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2025-03-05",
+    "event_type": "trade_policy",
+    "title": "Trump Announces Universal Base Tariffs",
+    "description": "The US announced sweeping baseline tariffs on major trading partners including China, Mexico, and the EU, igniting fears of a global trade war and a resurgence of inflation.",
+    "impact_level": 5,
+    "tags": ["tariffs", "trade war", "inflation"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2025-04-12",
+    "event_type": "economic",
+    "title": "US Debt Ceiling Crisis and Downgrade Threats",
+    "description": "Partisan battles over the debt ceiling re-emerged, resulting in a temporary government shutdown and explicit warnings from rating agencies of a sovereign downgrade.",
+    "impact_level": 5,
+    "tags": ["debt ceiling", "downgrade", "US politics", "sovereign risk"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2025-05-20",
+    "event_type": "geopolitics",
+    "title": "Ukraine War Reaches Critical Juncture",
+    "description": "A major offensive and stalled peace negotiations in Eastern Europe created renewed fears of broader NATO involvement, driving sustained safe-haven demand.",
+    "impact_level": 4,
+    "tags": ["Ukraine", "Russia", "conflict", "geopolitics"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2025-06-15",
+    "event_type": "monetary_policy",
+    "title": "Fed Cuts Rates Amidst Economic Slowdown",
+    "description": "Despite tariff-driven inflation risks, the Fed was forced to cut rates aggressively due to a sharply slowing economy, creating a perfect stagflationary environment for gold.",
+    "impact_level": 5,
+    "tags": ["stagflation", "Fed cut", "monetary policy"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2025-07-10",
+    "event_type": "central_bank",
+    "title": "Poland and Turkey Accelerate Repatriation and Buying",
+    "description": "The central banks of Poland and Turkey announced massive continued gold purchases and full repatriation efforts to shield themselves from Western financial sanctions.",
+    "impact_level": 3,
+    "tags": ["Poland", "Turkey", "central bank", "repatriation"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2025-08-22",
+    "event_type": "market_crash",
+    "title": "AI Investment Bubble Correction",
+    "description": "A sharp correction in major technology stocks rippled through broader markets as AI monetization lagged extreme valuations, triggering a massive flight to gold.",
+    "impact_level": 4,
+    "tags": ["tech crash", "AI bubble", "flight to safety", "equities"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2025-09-25",
+    "event_type": "de_dollarization",
+    "title": "BRICS Unveils Gold-Backed Trade Settlement Mechanism",
+    "description": "The BRICS bloc officially unveiled a decentralized trade settlement platform functionally pegged to a basket of commodities, including gold, marking a massive blow to USD hegemony.",
+    "impact_level": 5,
+    "tags": ["BRICS currency", "gold-backed", "de-dollarization"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2025-12-12",
+    "event_type": "market_milestone",
+    "title": "Gold Breaches $3,000 Milestone",
+    "description": "A combination of central bank buying, dollar weakness, and systemic risks pushed gold definitively past the psychological $3,000/oz barrier, triggering algorithmic buying.",
+    "impact_level": 5,
+    "tags": ["milestone", "breakout", "$3000"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2026-01-15",
+    "event_type": "economic",
+    "title": "Emerging Market Debt Crisis Accelerates",
+    "description": "A strengthening dollar and rising yields triggered a wave of defaults in vulnerable emerging markets, exacerbating global systemic risks and driving capital into gold.",
+    "impact_level": 4,
+    "tags": ["EM crisis", "debt default", "systemic risk"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2026-02-20",
+    "event_type": "monetary_policy",
+    "title": "Fed Signals Tolerance for 3% Inflation Target",
+    "description": "In a historic pivot, Federal Reserve officials quietly acknowledged a structural tolerance for inflation near 3%, effectively conceding defeat on the 2% mandate.",
+    "impact_level": 5,
+    "tags": ["inflation target", "Fed", "fiat debasement"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2026-04-05",
+    "event_type": "market_mania",
+    "title": "Retail FOMO Grips Global Markets",
+    "description": "Unprecedented retail demand for physical gold and ETFs swept through Asia and North America, causing massive premiums over spot prices and supply shortages.",
+    "impact_level": 4,
+    "tags": ["FOMO", "retail demand", "physical gold", "shortage"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2026-05-15",
+    "event_type": "market_milestone",
+    "title": "Gold Surges Past $3,400 Climaxing Historic Rally",
+    "description": "Driven by a perfect storm of de-dollarization, geopolitical chaos, trade wars, and stagflationary monetary policies, gold prices shattered the $3,400 mark.",
+    "impact_level": 5,
+    "tags": ["all-time high", "rally climax", "$3400"],
+    "source": "agent_research"
+  }
+]

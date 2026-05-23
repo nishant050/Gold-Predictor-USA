@@ -1,0 +1,1 @@
+# GoldSight app package

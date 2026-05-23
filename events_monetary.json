@@ -1,0 +1,506 @@
+[
+  {
+    "event_date": "1996-12-05",
+    "event_type": "monetary_policy",
+    "title": "Greenspan 'Irrational Exuberance' Speech",
+    "description": "Fed Chairman Alan Greenspan warns of 'irrational exuberance' in the stock market, hinting at potential monetary tightening.",
+    "impact_level": 2,
+    "tags": ["fed", "speech", "forward_guidance"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "1998-09-29",
+    "event_type": "monetary_policy",
+    "title": "Fed Cuts Rates for LTCM Bailout",
+    "description": "Fed initiates a 25 bps rate cut outside regular meetings to stabilize markets following the Long-Term Capital Management collapse.",
+    "impact_level": 3,
+    "tags": ["fed", "rate_cut", "emergency", "ltcm"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "1999-02-12",
+    "event_type": "monetary_policy",
+    "title": "BOJ Adopts Zero Interest Rate Policy (ZIRP)",
+    "description": "Bank of Japan lowers its benchmark rate essentially to zero, beginning an era of unconventional monetary policy.",
+    "impact_level": 3,
+    "tags": ["boj", "rate_cut", "zirp"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "1999-09-26",
+    "event_type": "monetary_policy",
+    "title": "Washington Agreement on Gold",
+    "description": "15 European central banks agree to limit their gold sales, establishing a floor for gold prices.",
+    "impact_level": 5,
+    "tags": ["central_banks", "gold_sales", "ecb"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2001-01-03",
+    "event_type": "monetary_policy",
+    "title": "Fed Surprise Rate Cut as Tech Bubble Bursts",
+    "description": "Fed surprisingly cuts rates by 50 bps to 6% to combat economic slowdown from the dot-com crash.",
+    "impact_level": 4,
+    "tags": ["fed", "rate_cut", "surprise"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2001-09-17",
+    "event_type": "monetary_policy",
+    "title": "Emergency Fed Cut Post 9/11",
+    "description": "Fed cuts rates 50 bps ahead of US stock market reopening following the September 11 terrorist attacks.",
+    "impact_level": 4,
+    "tags": ["fed", "rate_cut", "emergency"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2004-06-30",
+    "event_type": "monetary_policy",
+    "title": "Fed Begins 2004-2006 Hike Cycle",
+    "description": "Fed raises rates from 1.00% to 1.25%, the first of 17 consecutive 25 bps hikes.",
+    "impact_level": 3,
+    "tags": ["fed", "rate_hike", "cycle_start"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2006-08-08",
+    "event_type": "monetary_policy",
+    "title": "Fed Pauses 2004-2006 Hike Cycle",
+    "description": "Fed leaves rates unchanged at 5.25% after 17 consecutive rate hikes, ending the tightening cycle.",
+    "impact_level": 3,
+    "tags": ["fed", "pause", "cycle_end"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2007-08-17",
+    "event_type": "monetary_policy",
+    "title": "Fed Emergency Discount Rate Cut",
+    "description": "Fed unexpectedly cuts the discount rate by 50 bps as the subprime mortgage crisis begins to squeeze market liquidity.",
+    "impact_level": 4,
+    "tags": ["fed", "rate_cut", "emergency", "discount_rate"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2007-09-18",
+    "event_type": "monetary_policy",
+    "title": "Fed First Rate Cut of GFC Cycle",
+    "description": "Fed cuts fed funds rate by 50 bps to 4.75%, initiating the Great Financial Crisis easing cycle.",
+    "impact_level": 4,
+    "tags": ["fed", "rate_cut", "cycle_start", "gfc"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2008-01-22",
+    "event_type": "monetary_policy",
+    "title": "Fed 75 bps Emergency Cut",
+    "description": "Fed slashes rates by 75 bps in an emergency inter-meeting move amid plunging global stock markets.",
+    "impact_level": 4,
+    "tags": ["fed", "rate_cut", "emergency"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2008-11-25",
+    "event_type": "monetary_policy",
+    "title": "Fed Announces QE1",
+    "description": "Fed announces the first round of Quantitative Easing, purchasing $600 billion in MBS.",
+    "impact_level": 5,
+    "tags": ["fed", "qe", "qe1", "gfc"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2009-03-18",
+    "event_type": "monetary_policy",
+    "title": "Fed Expands QE1 to Treasuries",
+    "description": "Fed dramatically expands QE1, committing to buy $300 billion in long-term Treasury securities.",
+    "impact_level": 5,
+    "tags": ["fed", "qe", "qe1", "treasuries"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2009-04-24",
+    "event_type": "monetary_policy",
+    "title": "PBOC Reveals Large Gold Purchases",
+    "description": "China reports its gold reserves have risen by 76% since 2003, signaling major central bank demand shift.",
+    "impact_level": 4,
+    "tags": ["pboc", "gold_purchases", "central_banks"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2009-11-03",
+    "event_type": "monetary_policy",
+    "title": "India Buys 200 Tonnes of IMF Gold",
+    "description": "Reserve Bank of India purchases 200 metric tonnes of gold from the IMF for $6.7 billion.",
+    "impact_level": 4,
+    "tags": ["rbi", "gold_purchases", "central_banks", "imf"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2010-11-03",
+    "event_type": "monetary_policy",
+    "title": "Fed Announces QE2",
+    "description": "Fed commits to purchasing $600 billion in longer-term Treasury securities to stimulate a sluggish recovery.",
+    "impact_level": 5,
+    "tags": ["fed", "qe", "qe2"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2011-09-21",
+    "event_type": "monetary_policy",
+    "title": "Fed Announces Operation Twist",
+    "description": "Fed announces program to sell short-term Treasuries and buy $400 billion of long-term Treasuries to flatten yield curve.",
+    "impact_level": 3,
+    "tags": ["fed", "operation_twist", "yield_curve"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2012-07-26",
+    "event_type": "monetary_policy",
+    "title": "ECB Draghi 'Whatever It Takes'",
+    "description": "Mario Draghi pledges to do 'whatever it takes' to preserve the Euro, effectively ending the European sovereign debt crisis.",
+    "impact_level": 4,
+    "tags": ["ecb", "speech", "euro_crisis"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2012-09-13",
+    "event_type": "monetary_policy",
+    "title": "Fed Announces QE3",
+    "description": "Fed announces open-ended purchases of $40 billion of agency MBS per month, later expanded to include Treasuries.",
+    "impact_level": 5,
+    "tags": ["fed", "qe", "qe3"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2013-05-22",
+    "event_type": "monetary_policy",
+    "title": "Bernanke Taper Tantrum",
+    "description": "Ben Bernanke suggests the Fed could scale back bond purchases in coming meetings, triggering a massive bond selloff and gold plunge.",
+    "impact_level": 5,
+    "tags": ["fed", "qe_taper", "forward_guidance", "taper_tantrum"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2014-06-05",
+    "event_type": "monetary_policy",
+    "title": "ECB Implements Negative Rates",
+    "description": "ECB becomes the first major central bank to lower its deposit rate below zero (-0.1%).",
+    "impact_level": 4,
+    "tags": ["ecb", "nirp", "rate_cut"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2014-10-29",
+    "event_type": "monetary_policy",
+    "title": "Fed Ends QE3",
+    "description": "The Federal Reserve formally concludes its asset purchase program (QE3).",
+    "impact_level": 3,
+    "tags": ["fed", "qe", "qe3_end"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2015-08-11",
+    "event_type": "monetary_policy",
+    "title": "PBOC Devalues the Yuan",
+    "description": "China unexpectedly devalues the Yuan by nearly 2%, causing global market turmoil.",
+    "impact_level": 4,
+    "tags": ["pboc", "currency_devaluation", "yuan"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2015-12-16",
+    "event_type": "monetary_policy",
+    "title": "Fed First Hike in 9 Years",
+    "description": "Fed raises rates by 25 bps to 0.25%-0.50%, the first rate hike since 2006.",
+    "impact_level": 4,
+    "tags": ["fed", "rate_hike", "cycle_start"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2016-01-29",
+    "event_type": "monetary_policy",
+    "title": "BOJ Adopts Negative Rates",
+    "description": "Bank of Japan stuns markets by cutting its benchmark rate below zero to -0.1%.",
+    "impact_level": 4,
+    "tags": ["boj", "nirp", "rate_cut"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2016-09-21",
+    "event_type": "monetary_policy",
+    "title": "BOJ Implements Yield Curve Control (YCC)",
+    "description": "Bank of Japan targets the 10-year JGB yield at around zero percent, shifting from volume to yield targeting.",
+    "impact_level": 4,
+    "tags": ["boj", "ycc", "yield_curve_control"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2018-07-05",
+    "event_type": "monetary_policy",
+    "title": "Poland Begins Major Gold Purchases",
+    "description": "National Bank of Poland becomes the first EU nation in two decades to add significantly to its gold reserves.",
+    "impact_level": 3,
+    "tags": ["nbp", "gold_purchases", "central_banks"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2018-10-03",
+    "event_type": "monetary_policy",
+    "title": "Powell 'Long Way from Neutral' Comment",
+    "description": "Fed Chair Powell suggests rates are a long way from neutral, sparking a massive Q4 stock selloff and boosting gold later.",
+    "impact_level": 4,
+    "tags": ["fed", "speech", "hawkish"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2018-12-19",
+    "event_type": "monetary_policy",
+    "title": "Fed's Final Hike of 2015-2018 Cycle",
+    "description": "Fed hikes rates to 2.25%-2.50% despite market turmoil, ending the tightening cycle before the 2019 pivot.",
+    "impact_level": 4,
+    "tags": ["fed", "rate_hike", "cycle_end"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2019-01-04",
+    "event_type": "monetary_policy",
+    "title": "The Powell Pivot",
+    "description": "Jerome Powell signals patience on future rate hikes and flexibility on QT, reversing his hawkish stance from late 2018.",
+    "impact_level": 4,
+    "tags": ["fed", "speech", "dovish", "powell_pivot"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2019-07-31",
+    "event_type": "monetary_policy",
+    "title": "Fed First Rate Cut Since 2008",
+    "description": "Fed cuts rates by 25 bps, labeling it a 'mid-cycle adjustment' against trade tensions and slowing global growth.",
+    "impact_level": 4,
+    "tags": ["fed", "rate_cut", "cycle_start"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2019-09-17",
+    "event_type": "monetary_policy",
+    "title": "Fed Repo Market Intervention",
+    "description": "Fed intervenes in the overnight repo market to calm severe liquidity shortages, implicitly resuming balance sheet growth.",
+    "impact_level": 4,
+    "tags": ["fed", "repo", "liquidity", "qe_lite"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2020-03-03",
+    "event_type": "monetary_policy",
+    "title": "Fed Emergency 50 bps Cut (COVID)",
+    "description": "Fed deploys a surprise 50 bps inter-meeting rate cut as the COVID-19 pandemic roils global markets.",
+    "impact_level": 5,
+    "tags": ["fed", "rate_cut", "emergency", "covid"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2020-03-15",
+    "event_type": "monetary_policy",
+    "title": "Fed Cuts Rates to Zero, Restarts QE",
+    "description": "Fed slashes rates by 100 bps to 0-0.25% and announces $700 billion in asset purchases.",
+    "impact_level": 5,
+    "tags": ["fed", "rate_cut", "emergency", "zirp", "qe"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2020-03-23",
+    "event_type": "monetary_policy",
+    "title": "Fed 'QE Infinity'",
+    "description": "Fed announces it will buy Treasuries and MBS 'in the amounts needed' to support smooth market functioning.",
+    "impact_level": 5,
+    "tags": ["fed", "qe", "qe_infinity", "unlimited_qe"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2020-08-27",
+    "event_type": "monetary_policy",
+    "title": "Fed Adopts Average Inflation Targeting",
+    "description": "Powell announces a major policy shift at Jackson Hole, stating the Fed will allow inflation to run moderately above 2% to offset past shortfalls.",
+    "impact_level": 4,
+    "tags": ["fed", "jackson_hole", "forward_guidance", "ait"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2021-11-03",
+    "event_type": "monetary_policy",
+    "title": "Fed Announces QE Taper",
+    "description": "Fed formally announces it will begin reducing the pace of its monthly bond purchases.",
+    "impact_level": 3,
+    "tags": ["fed", "qe_taper", "qt_prep"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2022-03-16",
+    "event_type": "monetary_policy",
+    "title": "Fed First Rate Hike of Post-COVID Cycle",
+    "description": "Fed raises rates by 25 bps, beginning an aggressive tightening cycle to combat surging inflation.",
+    "impact_level": 4,
+    "tags": ["fed", "rate_hike", "cycle_start", "inflation"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2022-06-15",
+    "event_type": "monetary_policy",
+    "title": "Fed Hikes 75 bps",
+    "description": "Fed implements a massive 75 bps rate hike, its largest single increase since 1994.",
+    "impact_level": 4,
+    "tags": ["fed", "rate_hike", "jumbo_hike"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2022-07-21",
+    "event_type": "monetary_policy",
+    "title": "ECB Ends Negative Rate Era",
+    "description": "ECB raises rates by a larger-than-expected 50 bps, ending 8 years of negative interest rates.",
+    "impact_level": 4,
+    "tags": ["ecb", "rate_hike", "end_nirp"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2022-11-01",
+    "event_type": "monetary_policy",
+    "title": "Record Central Bank Gold Buying Revealed",
+    "description": "World Gold Council reports a massive 399 tonnes of central bank gold buying in Q3 2022, signaling a structural shift by PBOC and others.",
+    "impact_level": 5,
+    "tags": ["central_banks", "gold_purchases", "pboc", "wgc"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2022-12-20",
+    "event_type": "monetary_policy",
+    "title": "BOJ Unexpectedly Widens YCC Band",
+    "description": "Bank of Japan shocks markets by raising the upper limit of its 10-year yield target from 0.25% to 0.50%.",
+    "impact_level": 4,
+    "tags": ["boj", "ycc", "surprise"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2023-03-12",
+    "event_type": "monetary_policy",
+    "title": "Fed Creates Bank Term Funding Program (BTFP)",
+    "description": "Following SVB's collapse, Fed establishes an emergency lending facility allowing banks to post underwater bonds at par.",
+    "impact_level": 5,
+    "tags": ["fed", "emergency_facility", "btfp", "svb"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2023-10-31",
+    "event_type": "monetary_policy",
+    "title": "Turkey Leads Global Gold Purchases",
+    "description": "Central Bank of Turkey emerges as the world's largest official sector gold buyer for the year amid local currency depreciation.",
+    "impact_level": 4,
+    "tags": ["turkey", "gold_purchases", "central_banks"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2023-12-13",
+    "event_type": "monetary_policy",
+    "title": "Fed's Dovish Pivot",
+    "description": "Fed holds rates steady and signals the hiking cycle is effectively over, projecting 75 bps of cuts in 2024 via the dot plot.",
+    "impact_level": 4,
+    "tags": ["fed", "forward_guidance", "dovish", "pause"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2024-03-19",
+    "event_type": "monetary_policy",
+    "title": "BOJ Ends Negative Rates and YCC",
+    "description": "Bank of Japan raises rates to 0-0.1%, terminating its complex negative interest rate and yield curve control frameworks.",
+    "impact_level": 4,
+    "tags": ["boj", "rate_hike", "end_nirp", "end_ycc"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2024-05-07",
+    "event_type": "monetary_policy",
+    "title": "PBOC Pauses Gold Purchases",
+    "description": "China's central bank ends an 18-month streak of consecutive gold buying, leading to an immediate drop in gold prices.",
+    "impact_level": 4,
+    "tags": ["pboc", "gold_purchases", "pause"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2024-06-06",
+    "event_type": "monetary_policy",
+    "title": "ECB Cuts Rates Ahead of Fed",
+    "description": "ECB cuts interest rates by 25 bps, moving ahead of the US Federal Reserve in the easing cycle.",
+    "impact_level": 3,
+    "tags": ["ecb", "rate_cut", "cycle_start"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2024-09-18",
+    "event_type": "monetary_policy",
+    "title": "Fed Initiates Easing Cycle with 50 bps Cut",
+    "description": "Federal Reserve cuts rates by an aggressive 50 bps to 4.75%-5.00%, officially starting its easing cycle amid labor market concerns.",
+    "impact_level": 5,
+    "tags": ["fed", "rate_cut", "cycle_start", "jumbo_cut"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2024-11-07",
+    "event_type": "monetary_policy",
+    "title": "Fed Cuts Rates by 25 bps",
+    "description": "Federal Reserve delivers a 25 bps rate cut following the US presidential election, continuing its gradual easing.",
+    "impact_level": 3,
+    "tags": ["fed", "rate_cut"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2024-12-18",
+    "event_type": "monetary_policy",
+    "title": "Fed Cuts Rates by 25 bps",
+    "description": "Fed concludes 2024 with a widely anticipated 25 bps rate cut, bringing the total easing for the year to 100 bps.",
+    "impact_level": 3,
+    "tags": ["fed", "rate_cut"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2025-01-29",
+    "event_type": "monetary_policy",
+    "title": "Fed Pauses Rate Cuts",
+    "description": "Federal Reserve leaves rates unchanged at the first meeting of 2025, signaling caution due to persistent inflation data.",
+    "impact_level": 3,
+    "tags": ["fed", "pause", "forward_guidance"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2025-03-19",
+    "event_type": "monetary_policy",
+    "title": "Fed Resumes Easing with 25 bps Cut",
+    "description": "Fed cuts rates by 25 bps after a temporary pause, as labor market cooling outweighs inflation concerns.",
+    "impact_level": 3,
+    "tags": ["fed", "rate_cut"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2025-06-18",
+    "event_type": "monetary_policy",
+    "title": "Fed Cuts Rates 25 bps",
+    "description": "Federal Reserve cuts rates by another 25 bps, bringing the policy rate closer to the perceived neutral level.",
+    "impact_level": 3,
+    "tags": ["fed", "rate_cut"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2025-09-17",
+    "event_type": "monetary_policy",
+    "title": "Fed Pauses Easing Cycle",
+    "description": "Fed signals a prolonged pause, noting that the policy rate has effectively reached the neutral bound.",
+    "impact_level": 3,
+    "tags": ["fed", "pause", "cycle_end"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2026-03-18",
+    "event_type": "monetary_policy",
+    "title": "ECB Cuts Rates Further",
+    "description": "European Central Bank delivers another 25 bps rate cut to stimulate a flagging Eurozone economy.",
+    "impact_level": 3,
+    "tags": ["ecb", "rate_cut"],
+    "source": "agent_research"
+  }
+]

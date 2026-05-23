@@ -1,0 +1,263 @@
+[
+  {
+    "event_date": "1998-10-22",
+    "event_type": "natural_disaster",
+    "title": "Hurricane Mitch",
+    "description": "One of the deadliest Atlantic hurricanes, devastating Central America.",
+    "impact_level": 1,
+    "tags": ["hurricane", "central_america"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "1999-08-17",
+    "event_type": "natural_disaster",
+    "title": "Izmit Earthquake",
+    "description": "A 7.6 magnitude earthquake in Turkey causing massive destruction.",
+    "impact_level": 1,
+    "tags": ["earthquake", "turkey"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2003-02-10",
+    "event_type": "pandemic",
+    "title": "SARS Outbreak",
+    "description": "Severe acute respiratory syndrome outbreak begins to spread globally from Asia.",
+    "impact_level": 2,
+    "tags": ["virus", "health", "asia"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2004-12-26",
+    "event_type": "natural_disaster",
+    "title": "Indian Ocean Tsunami",
+    "description": "A massive 9.1 magnitude earthquake triggers a devastating tsunami across the Indian Ocean.",
+    "impact_level": 1,
+    "tags": ["tsunami", "earthquake", "asia"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2005-08-29",
+    "event_type": "natural_disaster",
+    "title": "Hurricane Katrina",
+    "description": "Hurricane Katrina devastates New Orleans, disrupting US oil production and causing an energy shock.",
+    "impact_level": 3,
+    "tags": ["hurricane", "us", "energy"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2008-05-02",
+    "event_type": "natural_disaster",
+    "title": "Cyclone Nargis",
+    "description": "A highly destructive cyclone that struck Myanmar, causing catastrophic damage.",
+    "impact_level": 1,
+    "tags": ["cyclone", "myanmar"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2008-05-12",
+    "event_type": "natural_disaster",
+    "title": "Sichuan Earthquake",
+    "description": "An 8.0 magnitude earthquake strikes Sichuan, China, causing massive loss of life.",
+    "impact_level": 1,
+    "tags": ["earthquake", "china"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2009-06-11",
+    "event_type": "pandemic",
+    "title": "H1N1 Swine Flu Pandemic",
+    "description": "WHO declares H1N1 a global pandemic.",
+    "impact_level": 2,
+    "tags": ["virus", "health", "global"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2010-01-12",
+    "event_type": "natural_disaster",
+    "title": "Haiti Earthquake",
+    "description": "A catastrophic 7.0 magnitude earthquake in Haiti.",
+    "impact_level": 1,
+    "tags": ["earthquake", "caribbean"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2010-04-14",
+    "event_type": "natural_disaster",
+    "title": "Eyjafjallajökull Eruption",
+    "description": "Volcanic eruption in Iceland creates an ash cloud that grounds European flights for weeks.",
+    "impact_level": 2,
+    "tags": ["volcano", "europe", "aviation"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2011-03-11",
+    "event_type": "natural_disaster",
+    "title": "Japan Earthquake, Tsunami, and Fukushima Nuclear Disaster",
+    "description": "A 9.0 magnitude earthquake and tsunami hit Japan, causing a nuclear meltdown at Fukushima.",
+    "impact_level": 4,
+    "tags": ["earthquake", "tsunami", "nuclear", "japan"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2012-10-29",
+    "event_type": "natural_disaster",
+    "title": "Hurricane Sandy",
+    "description": "Superstorm Sandy hits the US East Coast, causing widespread damage and flooding.",
+    "impact_level": 1,
+    "tags": ["hurricane", "us"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2014-08-08",
+    "event_type": "pandemic",
+    "title": "Ebola Epidemic",
+    "description": "WHO declares the West African Ebola outbreak a Public Health Emergency of International Concern.",
+    "impact_level": 2,
+    "tags": ["virus", "health", "africa"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2015-04-25",
+    "event_type": "natural_disaster",
+    "title": "Nepal Earthquake",
+    "description": "A 7.8 magnitude earthquake strikes Nepal, causing massive destruction.",
+    "impact_level": 1,
+    "tags": ["earthquake", "asia"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2017-08-25",
+    "event_type": "natural_disaster",
+    "title": "Hurricane Harvey",
+    "description": "Category 4 hurricane hits Texas, causing unprecedented flooding and disrupting the US oil industry.",
+    "impact_level": 2,
+    "tags": ["hurricane", "us", "energy"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2019-12-31",
+    "event_type": "pandemic",
+    "title": "COVID-19 Initial Outbreak",
+    "description": "Cases of severe atypical pneumonia are reported in Wuhan, China.",
+    "impact_level": 1,
+    "tags": ["virus", "health", "china"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2020-03-11",
+    "event_type": "pandemic",
+    "title": "COVID-19 WHO Pandemic Declaration",
+    "description": "WHO officially declares COVID-19 a global pandemic, triggering massive market selloffs.",
+    "impact_level": 5,
+    "tags": ["virus", "health", "global", "markets"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2020-03-20",
+    "event_type": "pandemic",
+    "title": "COVID-19 Global Lockdowns",
+    "description": "Unprecedented global lockdowns begin, freezing economic activity and prompting historic stimulus.",
+    "impact_level": 5,
+    "tags": ["lockdown", "economy", "global"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2020-11-09",
+    "event_type": "pandemic",
+    "title": "COVID-19 Vaccine Rollout Begins",
+    "description": "Pfizer announces its vaccine is highly effective, sparking a massive risk-on market rally.",
+    "impact_level": 4,
+    "tags": ["vaccine", "health", "recovery"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2020-12-18",
+    "event_type": "pandemic",
+    "title": "COVID-19 Variants Emergence",
+    "description": "New highly transmissible variants (Alpha, and later Delta) renew concerns about prolonged pandemic.",
+    "impact_level": 3,
+    "tags": ["virus", "mutation", "health"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2021-02-13",
+    "event_type": "climate",
+    "title": "Texas Power Freeze",
+    "description": "Severe winter storm causes massive power grid failure in Texas, disrupting energy supplies.",
+    "impact_level": 2,
+    "tags": ["winter_storm", "us", "energy"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2021-03-23",
+    "event_type": "supply_chain",
+    "title": "Suez Canal Blockage",
+    "description": "The Ever Given container ship blocks the Suez Canal, causing billions in global trade disruptions.",
+    "impact_level": 3,
+    "tags": ["shipping", "trade", "logistics"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2021-10-01",
+    "event_type": "supply_chain",
+    "title": "Global Supply Chain Crisis & Semiconductor Shortage",
+    "description": "Post-pandemic demand surges clash with logistical bottlenecks and chip shortages, sparking major inflation.",
+    "impact_level": 5,
+    "tags": ["inflation", "logistics", "semiconductors", "global"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2022-07-23",
+    "event_type": "pandemic",
+    "title": "Monkeypox (Mpox) Global Emergency",
+    "description": "WHO declares the spreading monkeypox (mpox) outbreak a global health emergency.",
+    "impact_level": 1,
+    "tags": ["virus", "health", "global"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2023-02-06",
+    "event_type": "natural_disaster",
+    "title": "Turkey-Syria Earthquake",
+    "description": "A devastating 7.8 magnitude earthquake strikes southern Turkey and northern Syria.",
+    "impact_level": 1,
+    "tags": ["earthquake", "middle_east"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2023-08-08",
+    "event_type": "natural_disaster",
+    "title": "Maui Wildfires",
+    "description": "Devastating wildfires driven by high winds destroy the town of Lahaina in Hawaii.",
+    "impact_level": 1,
+    "tags": ["wildfire", "us"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2024-03-26",
+    "event_type": "black_swan",
+    "title": "Baltimore Bridge Collapse",
+    "description": "Cargo ship destroys the Francis Scott Key Bridge, disrupting a major US port and supply chain routes.",
+    "impact_level": 2,
+    "tags": ["infrastructure", "supply_chain", "us"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2024-04-03",
+    "event_type": "natural_disaster",
+    "title": "Taiwan Earthquake",
+    "description": "A 7.4 magnitude earthquake strikes Taiwan, raising temporary concerns over semiconductor supply chains.",
+    "impact_level": 2,
+    "tags": ["earthquake", "taiwan", "semiconductors"],
+    "source": "agent_research"
+  },
+  {
+    "event_date": "2024-08-14",
+    "event_type": "pandemic",
+    "title": "Mpox Clade I Global Emergency",
+    "description": "WHO declares Mpox a global health emergency again due to the spread of a deadlier variant in Africa.",
+    "impact_level": 1,
+    "tags": ["virus", "health", "africa"],
+    "source": "agent_research"
+  }
+]
