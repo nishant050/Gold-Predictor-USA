@@ -30,19 +30,15 @@ def get_current_price(db: Session = Depends(get_db)):
     # Calculate performance metrics relative to historical dates
     price_today_usd = latest_usd.close
     
-    # 24h change (previous trading day)
+    # USD historical changes
     prev_day = db.query(GoldPrice).filter(
         GoldPrice.currency == "USD",
         GoldPrice.date < latest_usd.date
     ).order_by(desc(GoldPrice.date)).first()
     
-    # 7d change
-    prev_7d = get_nearest_gold_price(db, latest_usd.date - timedelta(days=7))
+    prev_7d = get_nearest_gold_price(db, latest_usd.date - timedelta(days=7), currency="USD")
+    prev_30d = get_nearest_gold_price(db, latest_usd.date - timedelta(days=30), currency="USD")
     
-    # 30d change
-    prev_30d = get_nearest_gold_price(db, latest_usd.date - timedelta(days=30))
-    
-    # Compute USD changes
     change_24h = price_today_usd - prev_day.close if prev_day else 0.0
     change_24h_pct = (change_24h / prev_day.close * 100) if prev_day else 0.0
     change_7d_pct = ((price_today_usd - prev_7d.close) / prev_7d.close * 100) if prev_7d else 0.0
@@ -52,12 +48,16 @@ def get_current_price(db: Session = Depends(get_db)):
     price_today_inr = latest_inr.close if latest_inr else 0.0
     prev_day_inr = db.query(GoldPrice).filter(
         GoldPrice.currency == "INR",
-        GoldPrice.date < latest_usd.date
+        GoldPrice.date < (latest_inr.date if latest_inr else latest_usd.date)
     ).order_by(desc(GoldPrice.date)).first()
+    
+    prev_7d_inr = get_nearest_gold_price(db, (latest_inr.date if latest_inr else latest_usd.date) - timedelta(days=7), currency="INR")
+    prev_30d_inr = get_nearest_gold_price(db, (latest_inr.date if latest_inr else latest_usd.date) - timedelta(days=30), currency="INR")
+    
     change_24h_inr = price_today_inr - prev_day_inr.close if prev_day_inr else 0.0
     change_24h_pct_inr = (change_24h_inr / prev_day_inr.close * 100) if prev_day_inr else 0.0
-    
-    # Fetch related commodities & indices (Optimized under Fix 2.2)
+    change_7d_pct_inr = ((price_today_inr - prev_7d_inr.close) / prev_7d_inr.close * 100) if prev_7d_inr else 0.0
+    change_30d_pct_inr = ((price_today_inr - prev_30d_inr.close) / prev_30d_inr.close * 100) if prev_30d_inr else 0.0
     related = {}
     indicators_list = ["SILVER", "DXY", "OIL_WTI", "SP500", "VIX"]
     cutoff_date = latest_usd.date - timedelta(days=45)
@@ -91,7 +91,9 @@ def get_current_price(db: Session = Depends(get_db)):
         "inr": {
             "price": round(price_today_inr, 2) if latest_inr else 0.0,
             "change_24h": round(change_24h_inr, 2) if latest_inr and prev_day_inr else 0.0,
-            "change_24h_pct": round(change_24h_pct_inr, 2) if latest_inr and prev_day_inr else 0.0
+            "change_24h_pct": round(change_24h_pct_inr, 2) if latest_inr and prev_day_inr else 0.0,
+            "change_7d_pct": round(change_7d_pct_inr, 2) if latest_inr and prev_7d_inr else 0.0,
+            "change_30d_pct": round(change_30d_pct_inr, 2) if latest_inr and prev_30d_inr else 0.0
         },
         "related": related,
         "last_updated": latest_usd.date.isoformat()

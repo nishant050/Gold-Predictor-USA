@@ -135,14 +135,14 @@ export default function Home() {
           <div style={{ display: 'flex', justifyContent: 'space-between', borderTop: '1px solid var(--border-card)', marginTop: '1.25rem', paddingTop: '0.75rem', fontSize: '0.85rem' }}>
             <div>
               <span style={{ color: 'var(--text-muted)' }}>7-Day: </span>
-              <span style={{ color: usdPrices.change_7d_pct >= 0 ? 'var(--bullish)' : 'var(--bearish)', fontWeight: 600 }}>
-                {usdPrices.change_7d_pct >= 0 ? '+' : ''}{usdPrices.change_7d_pct}%
+              <span style={{ color: currentPrices.change_7d_pct >= 0 ? 'var(--bullish)' : 'var(--bearish)', fontWeight: 600 }}>
+                {currentPrices.change_7d_pct >= 0 ? '+' : ''}{currentPrices.change_7d_pct}%
               </span>
             </div>
             <div>
               <span style={{ color: 'var(--text-muted)' }}>30-Day: </span>
-              <span style={{ color: usdPrices.change_30d_pct >= 0 ? 'var(--bullish)' : 'var(--bearish)', fontWeight: 600 }}>
-                {usdPrices.change_30d_pct >= 0 ? '+' : ''}{usdPrices.change_30d_pct}%
+              <span style={{ color: currentPrices.change_30d_pct >= 0 ? 'var(--bullish)' : 'var(--bearish)', fontWeight: 600 }}>
+                {currentPrices.change_30d_pct >= 0 ? '+' : ''}{currentPrices.change_30d_pct}%
               </span>
             </div>
           </div>

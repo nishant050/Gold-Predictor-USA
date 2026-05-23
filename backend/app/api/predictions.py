@@ -76,7 +76,7 @@ def get_latest_predictions(
     rate = get_exchange_rate(db)
     
     # 1. Fetch ML Predictions
-    ml_model_version = "ensemble_v1" if currency == "INR" else "ensemble_v1_inr"
+    ml_model_version = "ensemble_v1_inr" if currency == "INR" else "ensemble_v1"
     ml_rows = []
     if latest_ml_pred_date:
         ml_rows = db.query(Prediction).filter(
@@ -126,13 +126,13 @@ def get_latest_predictions(
         c_low_95 = r.confidence_low_95
         c_high_95 = r.confidence_high_95
         
-        # Convert to INR if needed
-        if currency == "INR":
-            pred_price = round(pred_price * rate, 2)
-            if c_low_80: c_low_80 = round(c_low_80 * rate, 2)
-            if c_high_80: c_high_80 = round(c_high_80 * rate, 2)
-            if c_low_95: c_low_95 = round(c_low_95 * rate, 2)
-            if c_high_95: c_high_95 = round(c_high_95 * rate, 2)
+        # Convert to USD if needed (since LLM now predicts in INR natively)
+        if currency == "USD" and rate > 0:
+            pred_price = round(pred_price / rate, 2)
+            if c_low_80: c_low_80 = round(c_low_80 / rate, 2)
+            if c_high_80: c_high_80 = round(c_high_80 / rate, 2)
+            if c_low_95: c_low_95 = round(c_low_95 / rate, 2)
+            if c_high_95: c_high_95 = round(c_high_95 / rate, 2)
             
         pct_change = ((pred_price - current_price) / current_price * 100) if current_price != 0 else 0.0
         
