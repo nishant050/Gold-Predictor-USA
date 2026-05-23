@@ -162,6 +162,11 @@ export default function AnalysisPage() {
       label: 'India M3 Money Supply',
       desc: 'Broad measure of Indian monetary liquidity in circulation.',
       rationale: 'Measures total money printing. Expansions in M3 represent currency debasement, raising the nominal price of hard commodities like gold due to currency supply inflation.'
+    },
+    DXY: {
+      label: 'US Dollar Index',
+      desc: 'Value of the US Dollar relative to a basket of foreign currencies.',
+      rationale: 'Global gold is priced in USD. While Indian gold is priced in INR, the underlying global wholesale market dictates price moves inversely to the strength of the US dollar.'
     }
   };
 

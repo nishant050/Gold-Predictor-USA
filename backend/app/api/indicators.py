@@ -9,7 +9,7 @@ from app.models.schemas import EconomicIndicator, GoldPrice
 
 router = APIRouter()
 
-INDICATORS = ["DXY", "FED_RATE", "CPI", "TREASURY_10Y", "OIL_WTI", "SP500", "VIX", "M2", "SILVER", "REAL_RATE"]
+INDICATORS = ["USD_INR", "RBI_REPO_RATE", "INDIA_CPI", "INDIA_GOVT_BOND_10Y", "OIL_BRENT", "NIFTY50", "INDIA_VIX", "INDIA_M3", "SILVER", "DXY"]
 
 import time
 _correlation_cache = {"data": None, "timestamp": 0}
@@ -26,7 +26,7 @@ def get_latest_indicators(db: Session = Depends(get_db)):
         
         if row:
             latest_vals[ind] = {
-                "value": round(row.value, 2) if ind not in ["M2"] else round(row.value, 1),
+                "value": round(row.value, 2) if ind not in ["INDIA_M3"] else round(row.value, 1),
                 "date": row.date.isoformat()
             }
         else:
@@ -62,7 +62,7 @@ def get_historical_indicator(
 def get_correlations(db: Session = Depends(get_db)):
     """
     Computes and returns the Pearson correlation coefficient between each 
-    macroeconomic indicator and gold USD close price across the entire database.
+    macroeconomic indicator and gold INR close price across the entire database.
     """
     global _correlation_cache
     now = time.time()
@@ -71,7 +71,7 @@ def get_correlations(db: Session = Depends(get_db)):
         
     # 1. Fetch Gold Prices
     gold_prices = db.query(GoldPrice.date, GoldPrice.close).filter(
-        GoldPrice.currency == "USD"
+        GoldPrice.currency == "INR"
     ).all()
     if not gold_prices:
         return {ind: 0.0 for ind in INDICATORS}

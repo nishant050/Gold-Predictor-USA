@@ -62,7 +62,7 @@ def get_current_price(db: Session = Depends(get_db)):
     change_7d_pct_inr = ((price_today_inr - prev_7d_inr.close) / prev_7d_inr.close * 100) if prev_7d_inr else 0.0
     change_30d_pct_inr = ((price_today_inr - prev_30d_inr.close) / prev_30d_inr.close * 100) if prev_30d_inr else 0.0
     related = {}
-    indicators_list = ["SILVER", "DXY", "OIL_WTI", "SP500", "VIX"]
+    indicators_list = ["SILVER", "DXY", "OIL_BRENT", "NIFTY50", "INDIA_VIX"]
     cutoff_date = latest_usd.date - timedelta(days=45)
     indicator_records = db.query(EconomicIndicator).filter(
         EconomicIndicator.indicator_name.in_(indicators_list),

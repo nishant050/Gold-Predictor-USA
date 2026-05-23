@@ -18,11 +18,9 @@ def fetch_all_indicators(db: Session, start_date: str = "1996-01-01") -> int:
     
     series_mapping = {
         "INTDSRINM193N": ("RBI_REPO_RATE", True),
-        "IRLTLT01INM156N": ("INDIA_GOVT_BOND_10Y", True),
+        "INDIRLTLT01STM": ("INDIA_GOVT_BOND_10Y", True),
         "INDCPIALLMINMEI": ("INDIA_CPI", True),
-        "MYAGM3INM189N": ("INDIA_M3", True),
-        "GOLDPMGBD228NLBM": ("GOLD_FIX_FRED", False),
-        "DCOILBRENTEU": ("OIL_BRENT_FRED", False)
+        "MYAGM3INM189N": ("INDIA_M3", True)
     }
     
     total_inserted = 0
