@@ -13,22 +13,6 @@ from app.services.llm_agent import run_agentic_loop, get_configured_openrouter_m
 
 logger = logging.getLogger(__name__)
 
-SYSTEM_PROMPT = """You are an expert gold market analyst with deep knowledge of 20+ years of gold price history. 
-Your job is to analyze current world events and economic conditions, find similar historical 
-periods/events, and predict how gold prices will move over the next 7 days.
-
-You must always structure your response in the following JSON format:
-{
-  "current_situation_summary": "Brief summary of current key events/conditions affecting gold",
-  "similar_historical_events": [
-    {
-      "event": "Description of the historical event",
-      "date": "YYYY-MM-DD",
-      "similarity_reason": "Why this is similar to the current situation",
-      "gold_price_at_time": 1234.56,
-      "gold_price_change_7d_pct": 5.2,
-      "key_context": "What were the economic conditions then (rates, inflation, dollar)"
-    }
 SYSTEM_PROMPT = """You are an expert Indian gold market analyst and econometrician specializing in historical pattern matching and causal inference for the Indian bullion market.
 Your task is to predict the price of MCX gold (in INR) exactly 7 days, 30 days, and 90 days from today based on the provided current market snapshot and historical context.
 
@@ -46,7 +30,27 @@ YOUR INSTRUCTIONS:
 4. Output your final forecast matching the EXACT JSON schema provided.
 
 You MUST think carefully and use your tools before arriving at a conclusion. Do NOT guess historical price reactions; look them up!
-"""
+
+You must always structure your response in the following JSON format:
+{
+  "current_situation_summary": "Brief summary of current key events/conditions affecting gold",
+  "similar_historical_events": [
+    {
+      "event": "Description of the historical event",
+      "date": "YYYY-MM-DD",
+      "similarity_reason": "Why this is similar to the current situation",
+      "gold_price_at_time": 1234.56,
+      "gold_price_change_7d_pct": 5.2,
+      "key_context": "What were the economic conditions then (rates, inflation, dollar)"
+    }
+  ],
+  "prediction": {
+    "target_price_7d": 2450.00,
+    "confidence_level": "high|medium|low",
+    "expected_direction": "up|down|flat",
+    "rationale": "Detailed explanation of why you predict this price based on the historical analogies and current data"
+  }
+}"""
 
 def get_latest_gold_price(db: Session, currency="INR") -> float:
     row = db.query(GoldPrice).filter(GoldPrice.currency == currency).order_by(desc(GoldPrice.date)).first()
@@ -78,7 +82,7 @@ def get_sentiment_summary(db: Session, days=7) -> float:
     return (total_sentiment / valid_days) if valid_days > 0 else 0.0
 
 def build_analysis_prompt(current_price, recent_news, indicators, avg_sentiment) -> str:
-    news_lines = [f"- {n['date']}: {n['headline']} (sentiment: {n['sentiment']:+.2f})" for n in recent_news[:15]]
+    news_lines = [f"- {n['date']}: {n['headline']} (sentiment: {round(n['sentiment'], 2)})" for n in recent_news[:15]]
     news_formatted = "\n".join(news_lines) if news_lines else "No recent headlines available."
     
     ind_lines = [f"- {k}: {v}" for k, v in indicators.items() if v is not None]
@@ -88,14 +92,14 @@ def build_analysis_prompt(current_price, recent_news, indicators, avg_sentiment)
 CURRENT DATE: {date.today().isoformat()}
 
 === CURRENT MARKET SNAPSHOT ===
-CURRENT GOLD PRICE (INR): ₹{current_price:,.2f} per unit
+CURRENT GOLD PRICE (INR): Rs. {round(current_price, 2)} per unit
 
 MACROECONOMIC INDICATORS:
 
 CURRENT ECONOMIC & COMMODITY INDICATORS:
 {ind_formatted}
 
-AVERAGE RECENT NEWS SENTIMENT (last 7 days): {avg_sentiment:+.2f}
+AVERAGE RECENT NEWS SENTIMENT (last 7 days): {round(avg_sentiment, 2)}
 
 RECENT NEWS HEADLINES:
 {news_formatted}"""
