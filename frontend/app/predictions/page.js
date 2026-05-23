@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { api } from '@/lib/api';
 import GoldChart from '../components/GoldChart';
 import AnimatedNumber from '../components/AnimatedNumber';
@@ -17,6 +17,15 @@ export default function PredictionsPage() {
   const [jobStatus, setJobStatus] = useState(null);
   const [runningJob, setRunningJob] = useState(null);
   const [actionMessage, setActionMessage] = useState('');
+  const [llmLogs, setLlmLogs] = useState([]);
+  const terminalRef = useRef(null);
+
+  // Auto-scroll the terminal without moving the main window
+  useEffect(() => {
+    if (terminalRef.current) {
+      terminalRef.current.scrollTop = terminalRef.current.scrollHeight;
+    }
+  }, [llmLogs]);
 
   const loadPredictionData = async ({ showLoading = true } = {}) => {
     if (showLoading) setLoading(true);
@@ -79,6 +88,27 @@ export default function PredictionsPage() {
 
     return () => clearInterval(intervalId);
   }, [runningJob, currency, period]);
+
+  // Poll for live LLM logs
+  useEffect(() => {
+    const isLlmRunning = runningJob === 'llm' || jobStatus?.llm?.status === 'running';
+    if (!isLlmRunning) return;
+
+    let logInterval;
+    const pollLogs = async () => {
+      try {
+        const logs = await api.getLLMLogs();
+        setLlmLogs(logs || []);
+      } catch (err) {
+        console.error('Error polling LLM logs:', err);
+      }
+    };
+
+    pollLogs(); // initial poll
+    logInterval = setInterval(pollLogs, 1000);
+
+    return () => clearInterval(logInterval);
+  }, [runningJob, jobStatus?.llm?.status]);
 
   const handleRegenerate = async (jobType) => {
     setRunningJob(jobType);
@@ -183,14 +213,54 @@ export default function PredictionsPage() {
         </div>
       </div>
 
-      {actionMessage && (
+      {(actionMessage || runningJob || jobStatus?.ml?.status === 'running' || jobStatus?.llm?.status === 'running') && (
         <div className="card" style={{ marginBottom: '1.5rem', padding: '1rem 1.25rem', borderLeft: `4px solid ${actionMessage.includes('failed') || actionMessage.includes('Could not') ? 'var(--bearish)' : 'var(--bullish)'}` }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', gap: '1rem', alignItems: 'center', flexWrap: 'wrap' }}>
-            <span style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>{actionMessage}</span>
-            {(runningJob || jobStatus?.ml?.status === 'running' || jobStatus?.llm?.status === 'running') && (
-              <span style={{ color: 'var(--text-muted)', fontSize: '0.8rem' }}>Refreshing automatically when the run finishes.</span>
-            )}
+            <span style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>
+              {actionMessage || (jobStatus?.llm?.status === 'running' ? jobStatus.llm.message || 'AI analysis is running...' : jobStatus?.ml?.message || 'ML prediction is running...')}
+            </span>
+            <span style={{ color: 'var(--text-muted)', fontSize: '0.8rem' }}>Refreshing automatically when the run finishes.</span>
           </div>
+
+          {(runningJob === 'llm' || jobStatus?.llm?.status === 'running') && (
+            <div 
+              ref={terminalRef}
+              style={{ 
+              marginTop: '1rem', 
+              background: '#0d1117', 
+              border: '1px solid #30363d', 
+              borderRadius: '6px', 
+              padding: '1rem',
+              height: '350px',
+              overflowY: 'auto',
+              fontFamily: 'ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace',
+              fontSize: '0.85rem',
+              color: '#c9d1d9',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '0.25rem'
+            }}>
+              <div style={{ color: '#7ee787', paddingBottom: '0.5rem', borderBottom: '1px solid #21262d', marginBottom: '0.5rem' }}>
+                $ Agent initialized. Listening for thoughts and tool calls...
+              </div>
+              
+              {llmLogs.length === 0 ? (
+                <div style={{ color: '#8b949e', fontStyle: 'italic' }}>Waiting for agent to output logs...</div>
+              ) : (
+                llmLogs.map((log, i) => (
+                  <div key={i} style={{ 
+                    color: log.level === 'ERROR' ? '#ff7b72' : log.level === 'WARNING' ? '#d2a8ff' : '#c9d1d9',
+                    wordBreak: 'break-word',
+                    paddingBottom: '0.25rem',
+                    borderBottom: i < llmLogs.length - 1 ? '1px solid #21262d' : 'none'
+                  }}>
+                    <span style={{ color: '#8b949e', marginRight: '0.5rem' }}>[{new Date(log.timestamp).toLocaleTimeString()}]</span>
+                    {log.message}
+                  </div>
+                ))
+              )}
+            </div>
+          )}
         </div>
       )}
 

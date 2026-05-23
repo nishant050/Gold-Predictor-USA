@@ -86,6 +86,10 @@ export const api = {
     return fetchJson('/predictions/jobs/status');
   },
 
+  async getLLMLogs() {
+    return fetchJson('/predictions/run-llm/logs');
+  },
+
   // Events Endpoints
   async getEvents(params = {}) {
     let url = '/events/';

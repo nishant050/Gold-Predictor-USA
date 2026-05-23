@@ -6,6 +6,7 @@ import json
 from app.database import SessionLocal, get_db
 from app.models.schemas import Prediction, LLMAnalysis, ModelVersion, GoldPrice
 from app.services.llm_service import run_llm_gold_analysis
+from app.utils.log_capture import clear_llm_logs, get_recent_llm_logs
 from app.ml.feature_engineering import fetch_raw_data, build_features
 from app.ml.xgboost_model import forecast_ml_models
 from app.ml.arima_model import train_and_forecast_arima
@@ -335,6 +336,14 @@ def run_llm_analysis(background_tasks: BackgroundTasks):
     if prediction_job_status["llm"]["status"] == "running":
         return prediction_job_status["llm"]
 
+    # Clear previous logs for the new run
+    clear_llm_logs()
+
     set_prediction_job_status("llm", "running", "AI analysis and prediction regeneration is queued.")
     background_tasks.add_task(run_llm_forecasting_background)
     return {"status": "triggered", "message": "LLM historical analogy engine started in the background."}
+
+@router.get("/run-llm/logs")
+def get_llm_analysis_logs():
+    """Returns the live log output of the currently running or recently finished LLM analysis."""
+    return get_recent_llm_logs()

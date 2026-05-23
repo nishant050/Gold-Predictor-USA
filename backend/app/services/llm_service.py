@@ -74,22 +74,9 @@ def get_sentiment_summary(db: Session, days=7) -> float:
             valid_days += 1
     return (total_sentiment / valid_days) if valid_days > 0 else 0.0
 
-def get_all_historical_events_formatted(db: Session) -> str:
-    rows = db.query(HistoricalEvent).all()
-    if not rows:
-        return "No historical events in database."
-        
-    lines = []
-    lines.append("| Date | Event Type | Title | Impact Level (1-5) | Gold Change (7d) | Gold Change (30d) | Gold Change (90d) |")
-    lines.append("|------|------------|-------|--------------------|------------------|-------------------|-------------------|")
-    for r in rows:
-        c7 = f"{r.gold_price_change_7d:+.1f}%" if r.gold_price_change_7d is not None else "N/A"
-        c30 = f"{r.gold_price_change_30d:+.1f}%" if r.gold_price_change_30d is not None else "N/A"
-        c90 = f"{r.gold_price_change_90d:+.1f}%" if r.gold_price_change_90d is not None else "N/A"
-        lines.append(f"| {r.event_date.isoformat()} | {r.event_type} | {r.title} | {r.impact_level} | {c7} | {c30} | {c90} |")
-    return "\n".join(lines)
 
-def build_analysis_prompt(current_price, recent_news, indicators, avg_sentiment, historical_events_str) -> str:
+
+def build_analysis_prompt(current_price, recent_news, indicators, avg_sentiment) -> str:
     news_lines = [f"- {n['date']}: {n['headline']} (sentiment: {n['sentiment']:+.2f})" for n in recent_news[:15]]
     news_formatted = "\n".join(news_lines) if news_lines else "No recent headlines available."
     
@@ -104,11 +91,7 @@ CURRENT ECONOMIC & COMMODITY INDICATORS:
 AVERAGE RECENT NEWS SENTIMENT (last 7 days): {avg_sentiment:+.2f}
 
 RECENT NEWS HEADLINES:
-{news_formatted}
-
-HISTORICAL EVENT-PRICE CORRELATION DATABASE SNAPSHOT:
-Below is a small summary of major events from the past 20 years and how gold reacted:
-{historical_events_str}"""
+{news_formatted}"""
     return prompt
 
 
@@ -120,14 +103,12 @@ async def run_llm_gold_analysis(db: Session) -> dict:
     recent_news = get_recent_headlines(db, days=7)
     indicators = get_current_indicators(db)
     avg_sentiment = get_sentiment_summary(db, days=7)
-    historical_events_str = get_all_historical_events_formatted(db)
     
     briefing_text = build_analysis_prompt(
         current_price=current_gold_price,
         recent_news=recent_news,
         indicators=indicators,
-        avg_sentiment=avg_sentiment,
-        historical_events_str=historical_events_str
+        avg_sentiment=avg_sentiment
     )
     
     openrouter_model = get_configured_openrouter_model(db)

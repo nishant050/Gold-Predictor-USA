@@ -12,6 +12,7 @@ from apscheduler.triggers.cron import CronTrigger
 from app.database import SessionLocal
 from app.services import yfinance_service, fred_service, data_ingestion, prediction_service
 from app.api.predictions import run_llm_forecasting_pipeline
+from app.utils.log_capture import setup_llm_log_capture
 
 logger = logging.getLogger("goldsight_scheduler")
 
@@ -87,6 +88,9 @@ def backfill_actuals_job():
 async def lifespan(app: FastAPI):
     # Initialize the database (creates tables if they don't exist)
     init_db()
+    
+    # Initialize the log capture for the LLM console
+    setup_llm_log_capture()
     
     # Configure and start background scheduler
     scheduler = BackgroundScheduler()
