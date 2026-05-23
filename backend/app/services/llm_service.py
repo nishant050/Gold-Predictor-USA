@@ -152,25 +152,20 @@ async def run_llm_gold_analysis(db: Session) -> dict:
         current_events_summary=analysis["current_situation_summary"],
         similar_historical_events=json.dumps(analysis["similar_historical_events"]),
         historical_outcomes=json.dumps([e.get("gold_price_change_7d_pct", e.get("gold_price_change_30d_pct", 0.0)) for e in analysis["similar_historical_events"]]),
-        reasoning=analysis["analysis"],
-        predicted_direction=analysis["prediction"]["direction"],
-        predicted_change_percent=analysis["prediction"]["predicted_change_percent"],
-        predicted_price_7d=analysis["prediction"].get("predicted_price_7d", analysis["prediction"].get("predicted_price_30d", 0.0)),
-        confidence_level=analysis["prediction"]["confidence"],
+        reasoning=analysis["prediction"].get("rationale", "No rationale provided"),
+        predicted_direction=analysis["prediction"].get("expected_direction", "flat"),
+        predicted_change_percent=((float(analysis["prediction"].get("target_price_7d", current_gold_price)) - current_gold_price) / current_gold_price * 100) if current_gold_price > 0 else 0.0,
+        predicted_price_7d=float(analysis["prediction"].get("target_price_7d", current_gold_price)),
+        confidence_level=analysis["prediction"].get("confidence_level", "medium"),
         model_used=openrouter_model,
         raw_response=raw_response
     )
     db.add(llm_analysis)
     
     # Compute 7-day daily predictions via geometric interpolation
-    target_pct = float(analysis["prediction"]["predicted_change_percent"])
-    # Adjust sign based on direction
-    direction = analysis["prediction"]["direction"].lower()
-    if direction == "down" and target_pct > 0:
-        target_pct = -target_pct
-    elif direction == "up" and target_pct < 0:
-        target_pct = -target_pct
-        
+    target_price = float(analysis["prediction"].get("target_price_7d", current_gold_price))
+    target_pct = ((target_price - current_gold_price) / current_gold_price * 100) if current_gold_price > 0 else 0.0
+    
     daily_rate = (1 + target_pct / 100) ** (1 / 7) - 1
     
     # Clear any existing LLM predictions for upcoming dates made today

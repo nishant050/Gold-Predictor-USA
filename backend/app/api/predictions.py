@@ -96,16 +96,26 @@ def get_latest_predictions(
         "directional_accuracy": model_ver.directional_accuracy if model_ver else 63.5
     }
     
+    INR_RETAIL_MULTIPLIER = 121.88
+    
     ml_predictions_list = []
     for r in ml_rows:
         pct_change = ((r.predicted_price - current_price) / current_price * 100) if current_price != 0 else 0.0
+        
+        # Scale for frontend display
+        p_price = r.predicted_price * INR_RETAIL_MULTIPLIER if currency == "INR" else r.predicted_price
+        c_low_80 = r.confidence_low_80 * INR_RETAIL_MULTIPLIER if currency == "INR" and r.confidence_low_80 else r.confidence_low_80
+        c_high_80 = r.confidence_high_80 * INR_RETAIL_MULTIPLIER if currency == "INR" and r.confidence_high_80 else r.confidence_high_80
+        c_low_95 = r.confidence_low_95 * INR_RETAIL_MULTIPLIER if currency == "INR" and r.confidence_low_95 else r.confidence_low_95
+        c_high_95 = r.confidence_high_95 * INR_RETAIL_MULTIPLIER if currency == "INR" and r.confidence_high_95 else r.confidence_high_95
+        
         ml_predictions_list.append({
             "date": r.target_date.isoformat(),
-            "predicted_price": r.predicted_price,
-            "confidence_low_80": r.confidence_low_80,
-            "confidence_high_80": r.confidence_high_80,
-            "confidence_low_95": r.confidence_low_95,
-            "confidence_high_95": r.confidence_high_95,
+            "predicted_price": round(p_price, 2),
+            "confidence_low_80": round(c_low_80, 2) if c_low_80 else None,
+            "confidence_high_80": round(c_high_80, 2) if c_high_80 else None,
+            "confidence_low_95": round(c_low_95, 2) if c_low_95 else None,
+            "confidence_high_95": round(c_high_95, 2) if c_high_95 else None,
             "change_pct": round(pct_change, 2),
             "prob_up": 0.5 + (pct_change / 100)  # rough directional indicator
         })
@@ -133,6 +143,12 @@ def get_latest_predictions(
             if c_high_80: c_high_80 = round(c_high_80 / rate, 2)
             if c_low_95: c_low_95 = round(c_low_95 / rate, 2)
             if c_high_95: c_high_95 = round(c_high_95 / rate, 2)
+        elif currency == "INR":
+            pred_price = round(pred_price * INR_RETAIL_MULTIPLIER, 2)
+            if c_low_80: c_low_80 = round(c_low_80 * INR_RETAIL_MULTIPLIER, 2)
+            if c_high_80: c_high_80 = round(c_high_80 * INR_RETAIL_MULTIPLIER, 2)
+            if c_low_95: c_low_95 = round(c_low_95 * INR_RETAIL_MULTIPLIER, 2)
+            if c_high_95: c_high_95 = round(c_high_95 * INR_RETAIL_MULTIPLIER, 2)
             
         pct_change = ((pred_price - current_price) / current_price * 100) if current_price != 0 else 0.0
         

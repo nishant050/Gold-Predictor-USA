@@ -44,6 +44,9 @@ def get_current_price(db: Session = Depends(get_db)):
     change_7d_pct = ((price_today_usd - prev_7d.close) / prev_7d.close * 100) if prev_7d else 0.0
     change_30d_pct = ((price_today_usd - prev_30d.close) / prev_30d.close * 100) if prev_30d else 0.0
     
+    # Scale GOLDBEES ETF (₹130 for 0.01g) to actual 24K Retail Spot Price per 1 Gram (~₹15,900)
+    INR_RETAIL_MULTIPLIER = 121.88
+    
     # Compute INR changes if exists
     price_today_inr = latest_inr.close if latest_inr else 0.0
     prev_day_inr = db.query(GoldPrice).filter(
@@ -89,8 +92,8 @@ def get_current_price(db: Session = Depends(get_db)):
             "change_30d_pct": round(change_30d_pct, 2)
         },
         "inr": {
-            "price": round(price_today_inr, 2) if latest_inr else 0.0,
-            "change_24h": round(change_24h_inr, 2) if latest_inr and prev_day_inr else 0.0,
+            "price": round(price_today_inr * INR_RETAIL_MULTIPLIER, 2) if latest_inr else 0.0,
+            "change_24h": round(change_24h_inr * INR_RETAIL_MULTIPLIER, 2) if latest_inr and prev_day_inr else 0.0,
             "change_24h_pct": round(change_24h_pct_inr, 2) if latest_inr and prev_day_inr else 0.0,
             "change_7d_pct": round(change_7d_pct_inr, 2) if latest_inr and prev_7d_inr else 0.0,
             "change_30d_pct": round(change_30d_pct_inr, 2) if latest_inr and prev_30d_inr else 0.0
