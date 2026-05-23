@@ -129,7 +129,7 @@ def get_event_detail(event_id: int, db: Session = Depends(get_db)):
     end_date = ev.event_date + timedelta(days=30)
     
     price_history = db.query(GoldPrice).filter(
-        GoldPrice.currency == "USD",
+        GoldPrice.currency == "INR",
         GoldPrice.date >= start_date,
         GoldPrice.date <= end_date
     ).order_by(GoldPrice.date).all()

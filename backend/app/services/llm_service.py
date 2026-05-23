@@ -29,23 +29,26 @@ You must always structure your response in the following JSON format:
       "gold_price_change_7d_pct": 5.2,
       "key_context": "What were the economic conditions then (rates, inflation, dollar)"
     }
-  ],
-  "analysis": "Detailed reasoning connecting historical patterns to current situation",
-  "prediction": {
-    "direction": "up|down|flat",
-    "predicted_change_percent": 3.5,
-    "predicted_price_7d": 3456.78,
-    "confidence": "low|medium|high",
-    "key_drivers": ["driver1", "driver2"],
-    "risks_to_prediction": ["risk1", "risk2"]
-  },
-  "daily_trajectory": "Brief description of expected path (e.g., 'initial spike then gradual decline')"
-}
+SYSTEM_PROMPT = """You are an expert Indian gold market analyst and econometrician specializing in historical pattern matching and causal inference for the Indian bullion market.
+Your task is to predict the price of MCX gold (in INR) exactly 7 days, 30 days, and 90 days from today based on the provided current market snapshot and historical context.
 
-Be specific. Reference actual historical dates, actual gold prices, and actual percentage moves.
-Your analysis should be grounded in facts, not speculation. Return ONLY valid JSON, do not wrap in markdown or add extra text."""
+CRITICAL UNDERSTANDING OF THE INDIAN GOLD MARKET:
+1. India imports almost all its gold, making the USD/INR exchange rate (rupee depreciation) a massive driver of domestic gold prices.
+2. The Reserve Bank of India (RBI) repo rate and Indian inflation (CPI) shape the domestic real interest rate.
+3. Import duties (set by the government) directly and immediately impact domestic prices.
+4. Demand is highly seasonal, driven by festivals (Dhanteras, Diwali, Akshaya Tritiya, Pongal) and wedding seasons (Oct-Feb and Apr-May).
+5. Rural farm incomes (linked to Kharif and Rabi harvests and Monsoon quality) account for ~60% of demand.
 
-def get_latest_gold_price(db: Session, currency="USD") -> float:
+YOUR INSTRUCTIONS:
+1. Analyze the current situation (Price, USD/INR, RBI rate, India CPI, Govt Bond Yields, Nifty 50, etc.).
+2. USE YOUR TOOLS to search for historical analogies (e.g. past rupee depreciation, previous RBI rate cycles, past Diwali periods, previous import duty hikes, historical geopolitical shocks).
+3. Identify 2-4 highly similar historical periods and explain WHY they are analogous.
+4. Output your final forecast matching the EXACT JSON schema provided.
+
+You MUST think carefully and use your tools before arriving at a conclusion. Do NOT guess historical price reactions; look them up!
+"""
+
+def get_latest_gold_price(db: Session, currency="INR") -> float:
     row = db.query(GoldPrice).filter(GoldPrice.currency == currency).order_by(desc(GoldPrice.date)).first()
     return row.close if row else 0.0
 
@@ -55,7 +58,7 @@ def get_recent_headlines(db: Session, days=7) -> list:
     return [{"date": r.date.isoformat(), "headline": r.headline, "sentiment": r.sentiment_score} for r in rows]
 
 def get_current_indicators(db: Session) -> dict:
-    indicators = ["DXY", "FED_RATE", "CPI", "TREASURY_10Y", "OIL_WTI", "SP500", "VIX", "M2", "SILVER", "REAL_RATE"]
+    indicators = ["USD_INR", "RBI_REPO_RATE", "INDIA_CPI", "INDIA_GOVT_BOND_10Y", "OIL_BRENT", "NIFTY50", "INDIA_VIX", "INDIA_M3", "SILVER", "REAL_RATE"]
     results = {}
     for ind in indicators:
         row = db.query(EconomicIndicator).filter(EconomicIndicator.indicator_name == ind).order_by(desc(EconomicIndicator.date)).first()
@@ -74,8 +77,6 @@ def get_sentiment_summary(db: Session, days=7) -> float:
             valid_days += 1
     return (total_sentiment / valid_days) if valid_days > 0 else 0.0
 
-
-
 def build_analysis_prompt(current_price, recent_news, indicators, avg_sentiment) -> str:
     news_lines = [f"- {n['date']}: {n['headline']} (sentiment: {n['sentiment']:+.2f})" for n in recent_news[:15]]
     news_formatted = "\n".join(news_lines) if news_lines else "No recent headlines available."
@@ -83,7 +84,13 @@ def build_analysis_prompt(current_price, recent_news, indicators, avg_sentiment)
     ind_lines = [f"- {k}: {v}" for k, v in indicators.items() if v is not None]
     ind_formatted = "\n".join(ind_lines) if ind_lines else "No indicator data available."
     
-    prompt = f"""CURRENT GOLD PRICE (USD): ${current_price:,.2f} (as of {date.today().isoformat()})
+    prompt = f"""
+CURRENT DATE: {date.today().isoformat()}
+
+=== CURRENT MARKET SNAPSHOT ===
+CURRENT GOLD PRICE (INR): ₹{current_price:,.2f} per unit
+
+MACROECONOMIC INDICATORS:
 
 CURRENT ECONOMIC & COMMODITY INDICATORS:
 {ind_formatted}
@@ -99,7 +106,7 @@ async def run_llm_gold_analysis(db: Session) -> dict:
     """Run a full LLM-based gold price historical analogy analysis via agentic loop."""
     logger.info("Initializing Agentic LLM gold analysis run...")
     
-    current_gold_price = get_latest_gold_price(db, "USD")
+    current_gold_price = get_latest_gold_price(db, "INR")
     recent_news = get_recent_headlines(db, days=7)
     indicators = get_current_indicators(db)
     avg_sentiment = get_sentiment_summary(db, days=7)
@@ -190,9 +197,9 @@ async def run_llm_gold_analysis(db: Session) -> dict:
             prediction_method="llm",
             features_used=json.dumps({
                 "sentiment": avg_sentiment,
-                "dxy": indicators.get("DXY"),
-                "fed_rate": indicators.get("FED_RATE"),
-                "cpi": indicators.get("CPI")
+                "usd_inr": indicators.get("USD_INR"),
+                "rbi_repo": indicators.get("RBI_REPO_RATE"),
+                "cpi": indicators.get("INDIA_CPI")
             })
         )
         db.add(db_pred)

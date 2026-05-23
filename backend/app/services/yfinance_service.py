@@ -7,13 +7,19 @@ import logging
 
 logger = logging.getLogger(__name__)
 
-def fetch_gold_prices(db: Session, start_date: str = "1996-01-01", end_date: str = None) -> int:
+def fetch_gold_prices(db: Session, start_date: str = "1996-01-01", currency: str = "INR") -> int:
     """
-    Fetch historical gold prices in USD from yfinance and store them in the database.
-    Returns the number of rows inserted.
+    Fetches historical gold prices from Yahoo Finance.
+    By default, fetches GOLDBEES.NS for INR prices.
+    If currency="USD", it fetches GC=F (COMEX Gold).
     """
-    logger.info(f"Fetching gold prices (USD) from {start_date} to {end_date or 'present'}...")
-    df = yf.download("GC=F", start=start_date, end=end_date)
+    logger.info(f"Fetching gold prices from yfinance for {currency}...")
+    
+    ticker_symbol = "GOLDBEES.NS" if currency == "INR" else "GC=F"
+    ticker = yf.Ticker(ticker_symbol)
+    
+    # We use 'max' to get all available data
+    df = ticker.history(period="max")
     if df.empty:
         logger.warning("No gold price data returned from yfinance.")
         return 0
@@ -26,7 +32,7 @@ def fetch_gold_prices(db: Session, start_date: str = "1996-01-01", end_date: str
     
     # Query existing dates to prevent duplicates
     existing_dates = {
-        row[0] for row in db.query(GoldPrice.date).filter(GoldPrice.currency == "USD").all()
+        row[0] for row in db.query(GoldPrice.date).filter(GoldPrice.currency == currency).all()
     }
     
     inserted = 0
@@ -64,22 +70,22 @@ def fetch_gold_prices(db: Session, start_date: str = "1996-01-01", end_date: str
             low=lo,
             close=cl,
             volume=vol,
-            currency="USD",
+            currency=currency,
             source="yfinance"
         )
         db.add(gold_price)
         inserted += 1
         
     db.commit()
-    logger.info(f"Successfully inserted {inserted} gold prices (USD) rows.")
+    logger.info(f"Successfully inserted {inserted} gold prices ({currency}) rows.")
     return inserted
 
 def fetch_gold_prices_inr(db: Session, start_date: str = "1996-01-01") -> int:
     """
-    Fetch gold price in USD and USD/INR rate to compute and store gold price in INR.
-    Returns the number of rows inserted.
+    Computes INR gold prices using international COMEX gold (GC=F) and USD/INR exchange rate (INR=X).
+    This serves as an alternative to GOLDBEES.NS if needed.
     """
-    logger.info(f"Computing historical gold prices in INR from {start_date}...")
+    logger.info("Computing secondary INR gold prices from COMEX * USD/INR...")
     
     # Fetch gold in USD and USD/INR exchange rate
     gold_df = yf.download("GC=F", start=start_date)
@@ -154,14 +160,11 @@ def fetch_related_commodities(db: Session, start_date: str = "1996-01-01") -> in
     """
     tickers = {
         "SI=F": "SILVER",
-        "CL=F": "OIL_WTI",
-        "^GSPC": "SP500",
-        "^VIX": "VIX",
+        "BZ=F": "OIL_BRENT",
+        "^NSEI": "NIFTY50",
+        "^INDIAVIX": "INDIA_VIX",
         "DX-Y.NYB": "DXY",
         "INR=X": "USD_INR",
-        "TIP": "TIPS_ETF",
-        "GDX": "GOLD_MINERS",
-        "UUP": "USD_BULL_ETF",
         "BTC-USD": "BITCOIN"
     }
     

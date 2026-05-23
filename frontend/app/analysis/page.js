@@ -115,53 +115,53 @@ export default function AnalysisPage() {
   const indicatorMetadata = {
     REAL_RATE: {
       label: 'Real Interest Rate',
-      desc: 'US Federal Funds Rate adjusted for Consumer Price Index inflation.',
+      desc: 'RBI Repo Rate adjusted for Indian Consumer Price Index inflation.',
       rationale: 'Gold pays no yield. When real rates are negative or low, the opportunity cost of holding gold drops, typically pushing gold prices higher. Positive real yields encourage treasury holdings, depressing gold.'
     },
-    DXY: {
-      label: 'US Dollar Index (DXY)',
-      desc: 'Strength of the US dollar against a basket of 6 major foreign currencies.',
-      rationale: 'Gold is globally priced in USD. When the Dollar weakens, gold becomes cheaper for foreign buyers, triggering international buying demand and pushing gold close prices upward.'
+    USD_INR: {
+      label: 'USD/INR Exchange Rate',
+      desc: 'Value of the US Dollar against the Indian Rupee.',
+      rationale: 'India imports almost all its gold, making the USD/INR exchange rate a massive driver of domestic gold prices. A weaker rupee directly increases domestic gold prices.'
     },
-    FED_RATE: {
-      label: 'Fed Funds Rate',
-      desc: 'Target overnight lending rate set by the US Federal Open Market Committee.',
+    RBI_REPO_RATE: {
+      label: 'RBI Repo Rate',
+      desc: 'Benchmark interest rate set by the Reserve Bank of India.',
       rationale: 'Reflects interest rate cycles. Rate cut pivots signal liquidity injection and monetary easing, historically acting as a primary macro catalyst for gold rallies.'
     },
-    CPI: {
-      label: 'CPI Inflation',
-      desc: 'Consumer Price Index measure tracking US inflation rate trends.',
+    INDIA_CPI: {
+      label: 'India CPI Inflation',
+      desc: 'Consumer Price Index measure tracking Indian inflation rate trends.',
       rationale: 'Gold is the classic inflation hedge. When purchasing power declines, investors buy gold as a tangible store of value, keeping prices in line with monetary inflation.'
     },
-    TREASURY_10Y: {
+    INDIA_GOVT_BOND_10Y: {
       label: '10-Year Bond Yield',
-      desc: 'Yield rate paid on US 10-Year Treasury sovereign debt securities.',
-      rationale: 'Acts as the global risk-free rate. High nominal yields draw capital out of commodities and precious metals, whereas collapsing yields trigger gold commodity inflows.'
+      desc: 'Yield rate paid on Indian 10-Year Government sovereign debt securities.',
+      rationale: 'Acts as the domestic risk-free rate. High nominal yields draw capital out of commodities and precious metals, whereas collapsing yields trigger gold commodity inflows.'
     },
     SILVER: {
       label: 'Silver Spot Price',
       desc: 'Per-ounce closing price of Silver futures contracts.',
       rationale: 'A sister precious metal. Silver is highly correlated with gold, moving upward during precious metal bull cycles, though it exhibits higher industrial supply volatility.'
     },
-    OIL_WTI: {
-      label: 'Crude Oil WTI',
-      desc: 'West Texas Intermediate crude oil commodity pricing.',
-      rationale: 'A primary driver of global input costs. Rising oil prices push up consumer price inflation expectations, expanding safe-haven hedging demand for gold.'
+    OIL_BRENT: {
+      label: 'Brent Crude Oil',
+      desc: 'Brent crude oil commodity pricing (Indian import benchmark).',
+      rationale: 'A primary driver of India\'s import bill and inflation. Rising oil prices push up consumer price inflation expectations, expanding safe-haven hedging demand for gold.'
     },
-    SP500: {
-      label: 'S&P 500 Index',
-      desc: 'Benchmark stock market index tracking 500 leading US public companies.',
-      rationale: 'Represents risk-on equities asset demand. Gold and S&P 500 can decouple or move in reverse correlation during panic recessions when investors flee equities for gold safety.'
+    NIFTY50: {
+      label: 'NIFTY 50 Index',
+      desc: 'Benchmark Indian stock market index tracking top 50 companies.',
+      rationale: 'Represents risk-on equities asset demand. Gold and equities can decouple or move in reverse correlation during panic recessions when investors flee to gold safety.'
     },
-    VIX: {
-      label: 'Volatility Index (VIX)',
-      desc: 'S&P 500 options implied volatility, signaling market fear.',
-      rationale: 'Measures financial anxiety. Spikes in the VIX represent global market panic, triggering immediate safe-haven allocations that boost gold prices.'
+    INDIA_VIX: {
+      label: 'India VIX',
+      desc: 'NIFTY options implied volatility, signaling market fear.',
+      rationale: 'Measures financial anxiety. Spikes in the VIX represent market panic, triggering immediate safe-haven allocations that boost gold prices.'
     },
-    M2: {
-      label: 'M2 Money Supply',
-      desc: 'Broad measure of US monetary liquidity in circulation.',
-      rationale: 'Measures total money printing. Expansions in M2 represent dollar debasement, raising the nominal price of hard commodities like gold due to currency supply inflation.'
+    INDIA_M3: {
+      label: 'India M3 Money Supply',
+      desc: 'Broad measure of Indian monetary liquidity in circulation.',
+      rationale: 'Measures total money printing. Expansions in M3 represent currency debasement, raising the nominal price of hard commodities like gold due to currency supply inflation.'
     }
   };
 

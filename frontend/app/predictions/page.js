@@ -7,7 +7,7 @@ import AnimatedNumber from '../components/AnimatedNumber';
 import { SkeletonPredictions } from '../components/Skeleton';
 
 export default function PredictionsPage() {
-  const [currency, setCurrency] = useState('USD');
+  const [currency, setCurrency] = useState('INR');
   const [period, setPeriod] = useState('1Y');
   const [predictions, setPredictions] = useState(null);
   const [chartData, setChartData] = useState(null);
@@ -196,18 +196,20 @@ export default function PredictionsPage() {
           {/* Currency Selector */}
           <div style={{ display: 'flex', background: 'rgba(255, 215, 0, 0.04)', padding: '0.25rem', borderRadius: '10px', border: '1px solid var(--border-card)' }}>
             <button 
-              className={`btn ${currency === 'USD' ? 'btn-primary' : 'btn-secondary'}`}
-              style={{ padding: '0.5rem 1rem', borderRadius: '8px' }}
-              onClick={() => setCurrency('USD')}
-            >
-              USD ($)
-            </button>
-            <button 
               className={`btn ${currency === 'INR' ? 'btn-primary' : 'btn-secondary'}`}
-              style={{ padding: '0.5rem 1rem', borderRadius: '8px', marginLeft: '0.25rem' }}
+              style={{ padding: '0.5rem 1rem', borderRadius: '8px' }}
               onClick={() => setCurrency('INR')}
+              disabled={loading}
             >
               INR (₹)
+            </button>
+            <button 
+              className={`btn ${currency === 'USD' ? 'btn-primary' : 'btn-secondary'}`}
+              style={{ padding: '0.5rem 1rem', borderRadius: '8px', marginLeft: '0.25rem' }}
+              onClick={() => setCurrency('USD')}
+              disabled={loading}
+            >
+              USD ($)
             </button>
           </div>
         </div>

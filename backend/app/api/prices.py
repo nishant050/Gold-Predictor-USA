@@ -7,7 +7,7 @@ from app.models.schemas import GoldPrice, EconomicIndicator
 
 router = APIRouter()
 
-def get_nearest_gold_price(db: Session, target_date: date, currency: str = "USD") -> GoldPrice:
+def get_nearest_gold_price(db: Session, target_date: date, currency: str = "INR") -> GoldPrice:
     """Finds the nearest gold price record on or before target_date."""
     return db.query(GoldPrice).filter(
         GoldPrice.currency == currency,
@@ -101,7 +101,7 @@ def get_current_price(db: Session = Depends(get_db)):
 def get_historical_prices(
     start_date: date = Query(None),
     end_date: date = Query(None),
-    currency: str = Query("USD"),
+    currency: str = Query("INR"),
     limit: int = Query(None, le=10000),
     db: Session = Depends(get_db)
 ):
@@ -122,7 +122,7 @@ def get_historical_prices(
 @router.get("/chart-data")
 def get_chart_data(
     period: str = Query("1Y"),
-    currency: str = Query("USD"),
+    currency: str = Query("INR"),
     db: Session = Depends(get_db)
 ):
     """

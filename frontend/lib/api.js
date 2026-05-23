@@ -42,23 +42,23 @@ async function fetchJson(endpoint, options = {}) {
 
 export const api = {
   // Prices Endpoints
-  async getLatestPrice(currency = 'USD') {
+  async getLatestPrice(currency = 'INR') {
     return fetchJson(`/prices/current?currency=${currency}`);
   },
   
-  async getHistoricalPrices(startDate, endDate, currency = 'USD') {
+  async getHistoricalPrices(startDate, endDate, currency = 'INR') {
     let url = `/prices/historical?currency=${currency}`;
     if (startDate) url += `&start_date=${startDate}`;
     if (endDate) url += `&end_date=${endDate}`;
     return fetchJson(url);
   },
 
-  async getChartData(period = '1Y', currency = 'USD') {
+  async getChartData(period = '1Y', currency = 'INR') {
     return fetchJson(`/prices/chart-data?period=${period}&currency=${currency}`);
   },
 
   // Predictions Endpoints
-  async get30DayPredictions(currency = 'USD') {
+  async get30DayPredictions(currency = 'INR') {
     return fetchJson(`/predictions/latest?currency=${currency}`);
   },
 

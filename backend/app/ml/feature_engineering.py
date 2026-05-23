@@ -2,12 +2,13 @@ import pandas as pd
 import numpy as np
 from sqlalchemy.orm import Session
 from app.models.schemas import GoldPrice, EconomicIndicator, NewsSentiment, HistoricalEvent
+from app.ml.indian_calendar import add_indian_seasonal_features
 import ta
 import logging
 
 logger = logging.getLogger(__name__)
 
-def fetch_raw_data(db: Session, currency: str = "USD") -> tuple[pd.DataFrame, pd.DataFrame]:
+def fetch_raw_data(db: Session, currency: str = "INR") -> tuple[pd.DataFrame, pd.DataFrame]:
     """
     Fetch all gold prices and economic indicators from the database,
     align them into a single daily DataFrame, and also return the raw historical events.
@@ -124,6 +125,9 @@ def build_features(df: pd.DataFrame, df_events: pd.DataFrame = None) -> pd.DataF
     """
     df = df.copy()
     
+    # Add 44 India-specific seasonal, cultural, and macroeconomic features
+    df = add_indian_seasonal_features(df)
+    
     # 1. Technical Indicators on Gold Price (using close price)
     # Simple Moving Averages
     df["sma_5"] = ta.trend.sma_indicator(df["close"], window=5)
@@ -182,7 +186,7 @@ def build_features(df: pd.DataFrame, df_events: pd.DataFrame = None) -> pd.DataF
         df["days_since_fed_change"] = (df.index - df.index[last_change_idx]).days
     
     # 2. Macro Indicators momentum / changes
-    macro_cols = ["DXY", "FED_RATE", "CPI", "TREASURY_10Y", "OIL_WTI", "SP500", "VIX", "M2", "SILVER", "REAL_RATE", "USD_INR"]
+    macro_cols = ["USD_INR", "RBI_REPO_RATE", "INDIA_CPI", "INDIA_GOVT_BOND_10Y", "OIL_BRENT", "NIFTY50", "INDIA_VIX", "INDIA_M3", "SILVER", "REAL_RATE"]
     for col in macro_cols:
         if col in df.columns:
             # 30-day change of the indicator
@@ -193,28 +197,22 @@ def build_features(df: pd.DataFrame, df_events: pd.DataFrame = None) -> pd.DataF
     # New Features
     if "SILVER" in df.columns:
         df["gold_silver_ratio"] = df["close"] / df["SILVER"].replace(0, np.nan)
-    if "OIL_WTI" in df.columns:
-        df["gold_oil_ratio"] = df["close"] / df["OIL_WTI"].replace(0, np.nan)
-    if "TREASURY_10Y" in df.columns and "FED_RATE" in df.columns:
-        df["yield_curve_slope"] = df["TREASURY_10Y"] - df["FED_RATE"]
-    if "DXY" in df.columns:
-        df["dxy_momentum_5d"] = df["DXY"].pct_change(5) * 100
+    if "OIL_BRENT" in df.columns:
+        df["gold_oil_ratio"] = df["close"] / df["OIL_BRENT"].replace(0, np.nan)
+    if "INDIA_GOVT_BOND_10Y" in df.columns and "RBI_REPO_RATE" in df.columns:
+        df["yield_curve_slope"] = df["INDIA_GOVT_BOND_10Y"] - df["RBI_REPO_RATE"]
+    if "USD_INR" in df.columns:
+        df["usd_inr_momentum_5d"] = df["USD_INR"].pct_change(5) * 100
         
-    # Calendar Features
-    df["day_of_week"] = df.index.dayofweek
-    df["month_of_year"] = df.index.month
-    df["week_of_month"] = (df.index.day - 1) // 7 + 1
-    df["is_month_end"] = df.index.is_month_end.astype(int)
-    df["is_quarter_end"] = df.index.is_quarter_end.astype(int)
-    df["is_january"] = (df.index.month == 1).astype(int)
+    # Calendar Features (Already handled by add_indian_seasonal_features)
     
-    if "DXY" in df.columns:
-        df["cross_asset_divergence"] = df["return_5d"] * 100 + df["DXY"].pct_change(5) * 100
-        if "VIX" in df.columns:
-            df["dxy_x_vix"] = (df["DXY"].pct_change(5) * 100) * df["VIX"]
+    if "USD_INR" in df.columns:
+        df["cross_asset_divergence"] = df["return_5d"] * 100 + df["USD_INR"].pct_change(5) * 100
+        if "INDIA_VIX" in df.columns:
+            df["usd_inr_x_vix"] = (df["USD_INR"].pct_change(5) * 100) * df["INDIA_VIX"]
             
-    if "FED_RATE" in df.columns and "CPI" in df.columns:
-        df["rate_x_inflation"] = df["FED_RATE"].diff(5) * df["CPI"].diff(30)
+    if "RBI_REPO_RATE" in df.columns and "INDIA_CPI" in df.columns:
+        df["rate_x_inflation"] = df["RBI_REPO_RATE"].diff(5) * df["INDIA_CPI"].diff(30)
         
     df["vol_normalized_return_5d"] = (df["return_5d"] * 100) / df["atr"].replace(0, np.nan)
     
@@ -223,38 +221,20 @@ def build_features(df: pd.DataFrame, df_events: pd.DataFrame = None) -> pd.DataF
         df["gold_btc_ratio"] = df["close"] / df["BITCOIN"].replace(0, np.nan)
         df["gold_btc_ratio_change_30d"] = df["gold_btc_ratio"].pct_change(30)
 
-    # Gold Miners divergence (miners leading/lagging gold)
-    if "GOLD_MINERS" in df.columns:
-        df["miners_divergence"] = df["close"].pct_change(5) - df["GOLD_MINERS"].pct_change(5)
+    # Nifty 50 interaction
+    if "NIFTY50" in df.columns:
+        df["nifty_divergence"] = df["close"].pct_change(5) - df["NIFTY50"].pct_change(5)
+        df["gold_nifty_ratio"] = df["close"] / df["NIFTY50"].replace(0, np.nan)
 
-    # TIPS momentum (rising inflation expectations)
-    if "TIPS_BREAKEVEN_10Y" in df.columns:
-        df["tips_momentum_5d"] = df["TIPS_BREAKEVEN_10Y"].diff(5)
-        df["tips_momentum_30d"] = df["TIPS_BREAKEVEN_10Y"].diff(30)
-
-    # Monetary base growth rate
-    if "MONETARY_BASE" in df.columns:
-        df["monetary_base_growth_90d"] = df["MONETARY_BASE"].pct_change(90) * 100
+    # M3 Growth Rate
+    if "INDIA_M3" in df.columns:
+        df["m3_growth_90d"] = df["INDIA_M3"].pct_change(90) * 100
 
     # ============================================================
     # FIX 1: Rolling Z-Score Normalization for Macro Indicators
     # ============================================================
-    # Instead of feeding raw levels (which drift over decades),
-    # normalize each macro indicator to a rolling z-score.
-    # This tells the model "how unusual is the current value
-    # compared to the last year" — making it regime-invariant.
-    #
-    # Formula: z = (value - rolling_mean_252d) / rolling_std_252d
-    # We keep the z-score version and DROP the raw level.
-    # The _diff_5d and _diff_30d columns computed above are fine
-    # because they are already relative changes, not raw levels.
-    # ============================================================
 
-    zscore_cols = ["FED_RATE", "CPI", "DXY", "TREASURY_10Y", "VIX", "M2",
-                   "REAL_RATE", "USD_INR", "TIPS_BREAKEVEN_10Y",
-                   "LONG_TERM_REAL_RATE", "MONETARY_BASE", "OIL_WTI_FRED",
-                   "TIPS_ETF", "GOLD_MINERS", "USD_BULL_ETF", "BITCOIN",
-                   "OIL_WTI", "SP500", "SILVER"]
+    zscore_cols = ["USD_INR", "RBI_REPO_RATE", "INDIA_CPI", "INDIA_GOVT_BOND_10Y", "INDIA_VIX", "INDIA_M3", "REAL_RATE", "OIL_BRENT", "NIFTY50", "SILVER"]
 
     raw_cols_to_drop = []
 

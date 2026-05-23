@@ -8,7 +8,7 @@ import time
 
 logger = logging.getLogger(__name__)
 
-def fetch_newsapi(query="gold price OR gold market OR gold commodity", page_size=50) -> list:
+def fetch_newsapi(query="gold price India OR MCX gold OR gold market India OR RBI gold policy", page_size=100) -> list:
     """
     Fetch news from NewsAPI.org.
     """
@@ -51,7 +51,7 @@ def fetch_newsapi(query="gold price OR gold market OR gold commodity", page_size
         logger.error(f"Error fetching from NewsAPI: {e}")
         return []
 
-def fetch_guardian(query="gold price", from_date=None, to_date=None) -> list:
+def fetch_guardian(query="gold price India OR MCX gold", from_date=None, to_date=None) -> list:
     """
     Fetch news from The Guardian API.
     """
@@ -99,12 +99,12 @@ def fetch_guardian(query="gold price", from_date=None, to_date=None) -> list:
         logger.error(f"Error fetching from The Guardian: {e}")
         return []
 
-def fetch_google_news_rss(query="gold price") -> list:
+def fetch_google_news_rss(query="gold price India OR MCX gold price") -> list:
     """
     Fetch news from Google News RSS feed.
     """
     encoded_query = urllib.parse.quote(query)
-    url = f"https://news.google.com/rss/search?q={encoded_query}&hl=en-US&gl=US&ceid=US:en"
+    url = f"https://news.google.com/rss/search?q={encoded_query}&hl=en-IN&gl=IN&ceid=IN:en"
     
     try:
         feed = feedparser.parse(url)
@@ -156,7 +156,11 @@ def fetch_nyt_archive(year: int, month: int) -> list:
         docs = data.get("response", {}).get("docs", [])
         
         # Keywords to filter articles relevant to gold and economy
-        keywords = {"gold", "federal reserve", "inflation", "interest rate", "war", "crisis", "economy", "recession"}
+        keywords = {
+            "gold", "gold price", "gold market", "bullion", "commodity", "commodities",
+            "inflation", "recession", "central bank", "interest rate", "rbi", "reserve bank",
+            "rupee", "import duty", "mcx", "dhanteras", "akshaya tritiya", "wedding season gold"
+        }
         
         results = []
         for doc in docs:
@@ -194,9 +198,9 @@ def fetch_all_current_news() -> list:
     logger.info("Fetching recent news headlines...")
     
     news_items = []
-    news_items.extend(fetch_google_news_rss("gold price OR gold market"))
-    news_items.extend(fetch_newsapi("gold price OR gold market OR gold commodity"))
-    news_items.extend(fetch_guardian("gold price"))
+    news_items.extend(fetch_google_news_rss("gold price India OR MCX gold price OR gold import duty"))
+    news_items.extend(fetch_newsapi("gold price India OR MCX gold OR RBI gold policy"))
+    news_items.extend(fetch_guardian("gold price India OR MCX gold"))
     
     # Deduplicate by lowercase headline
     seen_headlines = set()

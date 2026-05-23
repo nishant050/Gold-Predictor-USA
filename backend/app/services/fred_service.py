@@ -17,16 +17,12 @@ def fetch_all_indicators(db: Session, start_date: str = "1996-01-01") -> int:
     max_retries = 3
     
     series_mapping = {
-        "FEDFUNDS": ("FED_RATE", True),       # Monthly -> forward-fill
-        "DGS10": ("TREASURY_10Y", False),      # Daily
-        "CPIAUCSL": ("CPI", True),            # Monthly -> forward-fill
-        "DTWEXBGS": ("DXY_FRED", False),       # Daily
-        "M2SL": ("M2", True),                  # Monthly -> forward-fill
-        "GOLDPMGBD228NLBM": ("GOLD_FIX_FRED", False),  # Daily
-        "DFII10": ("TIPS_BREAKEVEN_10Y", False),      # Daily
-        "IRLTLT01USM156N": ("LONG_TERM_REAL_RATE", True),  # Monthly -> ffill
-        "BOGMBASE": ("MONETARY_BASE", True),            # Monthly -> ffill
-        "DCOILWTICO": ("OIL_WTI_FRED", False)          # Daily
+        "INTDSRINM193N": ("RBI_REPO_RATE", True),
+        "IRLTLT01INM156N": ("INDIA_GOVT_BOND_10Y", True),
+        "INDCPIALLMINMEI": ("INDIA_CPI", True),
+        "MYAGM3INM189N": ("INDIA_M3", True),
+        "GOLDPMGBD228NLBM": ("GOLD_FIX_FRED", False),
+        "DCOILBRENTEU": ("OIL_BRENT_FRED", False)
     }
     
     total_inserted = 0
@@ -124,36 +120,36 @@ def fetch_all_indicators(db: Session, start_date: str = "1996-01-01") -> int:
 
 def compute_real_interest_rate(db: Session) -> int:
     """
-    Calculate Real Rate = FED_RATE - CPI_YoY_change
+    Calculate Real Rate = RBI_REPO_RATE - CPI_YoY_change
     CPI YoY: (CPI_today - CPI_12months_ago) / CPI_12months_ago * 100
     Store as REAL_RATE in economic_indicators.
     """
     logger.info("Computing real interest rates...")
     
-    # Query all FED_RATE and CPI daily values
-    fed_rates = db.query(EconomicIndicator.date, EconomicIndicator.value).filter(
-        EconomicIndicator.indicator_name == "FED_RATE"
+    # Query all RBI_REPO_RATE and INDIA_CPI daily values
+    rate_records = db.query(EconomicIndicator.date, EconomicIndicator.value).filter(
+        EconomicIndicator.indicator_name == "RBI_REPO_RATE"
     ).order_by(EconomicIndicator.date).all()
     
-    cpi_values = db.query(EconomicIndicator.date, EconomicIndicator.value).filter(
-        EconomicIndicator.indicator_name == "CPI"
+    cpi_records = db.query(EconomicIndicator.date, EconomicIndicator.value).filter(
+        EconomicIndicator.indicator_name == "INDIA_CPI"
     ).order_by(EconomicIndicator.date).all()
     
-    if not fed_rates or not cpi_values:
-        logger.warning("Missing FED_RATE or CPI data to compute REAL_RATE.")
+    if not rate_records or not cpi_records:
+        logger.warning("Missing RBI_REPO_RATE or INDIA_CPI data to compute REAL_RATE.")
         return 0
         
-    fed_df = pd.DataFrame(fed_rates, columns=["date", "fed_rate"]).set_index("date")
-    cpi_df = pd.DataFrame(cpi_values, columns=["date", "cpi"]).set_index("date")
+    rate_df = pd.DataFrame(rate_records, columns=["date", "repo_rate"]).set_index("date")
+    cpi_df = pd.DataFrame(cpi_records, columns=["date", "cpi"]).set_index("date")
     
     # Since our CPI series is daily (forward-filled), shifting by 365 corresponds to roughly 365 days ago.
     cpi_df["cpi_prev_year"] = cpi_df["cpi"].shift(365)
     cpi_df["cpi_yoy"] = ((cpi_df["cpi"] - cpi_df["cpi_prev_year"]) / cpi_df["cpi_prev_year"]) * 100
     cpi_df = cpi_df.dropna()
     
-    # Join FED_RATE and CPI YoY
-    combined = fed_df.join(cpi_df[["cpi_yoy"]], how="inner").dropna()
-    combined["real_rate"] = combined["fed_rate"] - combined["cpi_yoy"]
+    # Join RBI_REPO_RATE and INDIA_CPI YoY
+    combined = rate_df.join(cpi_df[["cpi_yoy"]], how="inner").dropna()
+    combined["real_rate"] = combined["repo_rate"] - combined["cpi_yoy"]
     combined = combined.reset_index()
     
     existing_dates = {

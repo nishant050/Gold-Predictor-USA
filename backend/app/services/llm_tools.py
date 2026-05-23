@@ -12,17 +12,13 @@ logger = logging.getLogger(__name__)
 
 # --- Tool Functions ---
 
-def get_price_history(db: Session, start_date: str, end_date: str, currency: str = "USD") -> str:
-    prices = db.query(GoldPrice).filter(
-        GoldPrice.currency == currency,
-        GoldPrice.date >= start_date,
-        GoldPrice.date <= end_date
-    ).order_by(GoldPrice.date).all()
+def get_price_history(db: Session, days: int = 30, currency: str = "INR") -> str:
+    gold_records = db.query(GoldPrice).filter(GoldPrice.currency == currency).order_by(desc(GoldPrice.date)).limit(days).all()
     
-    if not prices:
-        return f"No price data found between {start_date} and {end_date}."
+    if not gold_records:
+        return f"No price data found in {currency} for the last {days} days."
         
-    data = [{"date": str(p.date), "close": p.close} for p in prices]
+    data = [{"date": str(p.date), "close": p.close} for p in gold_records]
     return f"Found {len(data)} trading days. Data: {json.dumps(data)}"
 
 def get_economic_indicator(db: Session, indicator_name: str, start_date: str, end_date: str) -> str:
@@ -94,9 +90,9 @@ def get_event_detail(db: Session, event_id: int) -> str:
     return json.dumps(data)
 
 def get_cross_asset_ratios(db: Session, start_date: str, end_date: str) -> str:
-    # Get Gold, Silver, SP500, Oil
+    # Get Gold, NIFTY50, OIL_BRENT
     prices = db.query(GoldPrice.date, GoldPrice.close).filter(
-        GoldPrice.currency == "USD", GoldPrice.date >= start_date, GoldPrice.date <= end_date
+        GoldPrice.currency == "INR", GoldPrice.date >= start_date, GoldPrice.date <= end_date
     ).all()
     
     if not prices:
@@ -105,7 +101,7 @@ def get_cross_asset_ratios(db: Session, start_date: str, end_date: str) -> str:
     df_gold = pd.DataFrame(prices, columns=["date", "gold"]).set_index("date")
     
     inds = db.query(EconomicIndicator).filter(
-        EconomicIndicator.indicator_name.in_(["SILVER", "SP500", "OIL_WTI"]),
+        EconomicIndicator.indicator_name.in_(["NIFTY50", "OIL_BRENT"]),
         EconomicIndicator.date >= start_date,
         EconomicIndicator.date <= end_date
     ).all()
@@ -120,13 +116,16 @@ def get_cross_asset_ratios(db: Session, start_date: str, end_date: str) -> str:
     if df_all.empty:
         return "Insufficient overlap for cross-asset computation."
         
+    def safe_div(a, b):
+        return round(a / b, 2) if b and b != 0 else None
+
     res = []
     for date_idx, row in df_all.iterrows():
+        g_val = row["gold"]
         res.append({
             "date": str(date_idx),
-            "gold_silver_ratio": round(row["gold"] / row["SILVER"], 2) if row.get("SILVER") else None,
-            "gold_oil_ratio": round(row["gold"] / row["OIL_WTI"], 2) if row.get("OIL_WTI") else None,
-            "gold_sp500_ratio": round(row["gold"] / row["SP500"], 4) if row.get("SP500") else None
+            "gold_nifty_ratio": safe_div(g_val, row.get("NIFTY50")),
+            "gold_oil_ratio": safe_div(g_val, row.get("OIL_BRENT"))
         })
     return json.dumps(res[-10:]) # Return last 10 days to save tokens
 
@@ -146,14 +145,14 @@ LLM_TOOLS_SCHEMA = [
         "type": "function",
         "function": {
             "name": "get_price_history",
-            "description": "Fetch gold closing prices (in USD) for a specific date range.",
+            "description": "Fetch historical gold closing prices (in INR) for a specified number of recent days.",
             "parameters": {
                 "type": "object",
                 "properties": {
-                    "start_date": {"type": "string", "description": "YYYY-MM-DD"},
-                    "end_date": {"type": "string", "description": "YYYY-MM-DD"}
+                    "days": {"type": "integer", "description": "Number of recent days to fetch"},
+                    "currency": {"type": "string", "description": "Currency code, defaults to INR"}
                 },
-                "required": ["start_date", "end_date"]
+                "required": []
             }
         }
     },
@@ -161,7 +160,7 @@ LLM_TOOLS_SCHEMA = [
         "type": "function",
         "function": {
             "name": "get_economic_indicator",
-            "description": "Fetch historical data for a specific economic indicator (e.g., DXY, FED_RATE, CPI, VIX, M2, TREASURY_10Y, REAL_RATE).",
+            "description": "Fetch the latest value or history for a specific economic indicator (e.g., USD_INR, RBI_REPO_RATE, INDIA_CPI, INDIA_VIX, NIFTY50).",
             "parameters": {
                 "type": "object",
                 "properties": {
@@ -225,7 +224,7 @@ LLM_TOOLS_SCHEMA = [
         "type": "function",
         "function": {
             "name": "get_cross_asset_ratios",
-            "description": "Get ratios of gold to silver, oil, and SP500 for the end of a given date range.",
+            "description": "Get ratios of gold to NIFTY50 and OIL_BRENT for the end of a given date range.",
             "parameters": {
                 "type": "object",
                 "properties": {

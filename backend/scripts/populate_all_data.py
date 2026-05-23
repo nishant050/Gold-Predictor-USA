@@ -26,11 +26,11 @@ def main():
         logger.info("=== Starting Data Ingestion Script (yfinance + FRED) ===")
         
         # 1. Fetch gold prices USD (20+ years)
-        usd_rows = fetch_gold_prices(db, start_date="1996-01-01")
+        usd_rows = fetch_gold_prices(db, start_date="1996-01-01", currency="USD")
         logger.info(f"Gold prices USD processed: {usd_rows} new rows added.")
         
-        # 2. Fetch gold prices INR (computed)
-        inr_rows = fetch_gold_prices_inr(db, start_date="1996-01-01")
+        # 2. Fetch gold prices INR (20+ years)
+        inr_rows = fetch_gold_prices(db, start_date="1996-01-01", currency="INR")
         logger.info(f"Gold prices INR processed: {inr_rows} new rows added.")
         
         # 3. Fetch related commodities from yfinance

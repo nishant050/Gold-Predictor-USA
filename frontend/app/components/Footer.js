@@ -13,7 +13,7 @@ export default function Footer() {
         </div>
         <div>
           <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem' }}>
-            Data sources: Yahoo Finance & Federal Reserve FRED. Predictions are educational and do not constitute financial advice.
+            Data sources: Yahoo Finance & FRED. Predictions are educational and do not constitute financial advice.
           </p>
         </div>
       </div>

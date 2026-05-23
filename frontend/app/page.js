@@ -7,7 +7,7 @@ import AnimatedNumber from './components/AnimatedNumber';
 import { SkeletonDashboard } from './components/Skeleton';
 
 export default function Home() {
-  const [currency, setCurrency] = useState('USD');
+  const [currency, setCurrency] = useState('INR');
   const [period, setPeriod] = useState('1Y');
   const [latestData, setLatestData] = useState(null);
   const [chartData, setChartData] = useState(null);
@@ -96,18 +96,18 @@ export default function Home() {
         {/* Currency Selector */}
         <div style={{ display: 'flex', background: 'rgba(255, 215, 0, 0.04)', padding: '0.25rem', borderRadius: '10px', border: '1px solid var(--border-card)' }}>
           <button 
-            className={`btn ${currency === 'USD' ? 'btn-primary' : 'btn-secondary'}`}
-            style={{ padding: '0.5rem 1rem', borderRadius: '8px' }}
-            onClick={() => setCurrency('USD')}
-          >
-            USD ($)
-          </button>
-          <button 
             className={`btn ${currency === 'INR' ? 'btn-primary' : 'btn-secondary'}`}
-            style={{ padding: '0.5rem 1rem', borderRadius: '8px', marginLeft: '0.25rem' }}
+            style={{ padding: '0.5rem 1rem', borderRadius: '8px' }}
             onClick={() => setCurrency('INR')}
           >
             INR (₹)
+          </button>
+          <button 
+            className={`btn ${currency === 'USD' ? 'btn-primary' : 'btn-secondary'}`}
+            style={{ padding: '0.5rem 1rem', borderRadius: '8px', marginLeft: '0.25rem' }}
+            onClick={() => setCurrency('USD')}
+          >
+            USD ($)
           </button>
         </div>
       </div>
@@ -118,7 +118,7 @@ export default function Home() {
         {/* Card 1: Current Gold Price */}
         <div className="card col-4 pulse-glow">
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
-            <span className="badge badge-gold" style={{ textTransform: 'uppercase' }}>Live Price ({currency})</span>
+            <span className="badge badge-gold" style={{ textTransform: 'uppercase' }}>MCX Price ({currency})</span>
             <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>Updated daily</span>
           </div>
           <h1 style={{ fontSize: '3rem', fontWeight: 800, color: 'var(--text-primary)', marginBottom: '0.5rem' }}>

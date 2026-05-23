@@ -28,7 +28,7 @@ def main():
     try:
         # 1. Fetch raw data
         logger.info("Fetching raw price/indicator series...")
-        df_raw, df_events = fetch_raw_data(db, currency="USD")
+        df_raw, df_events = fetch_raw_data(db, currency="INR")
         
         # 2. Build features
         df_features = build_features(df_raw, df_events)
@@ -80,42 +80,42 @@ def main():
         for p in blended_preds:
             target_date = today_date + timedelta(days=p["step"])
             
-            # Save USD prediction
-            usd_pred = Prediction(
+            # Save INR prediction (Native)
+            inr_pred = Prediction(
                 prediction_date=today_date,
                 target_date=target_date,
-                predicted_price=p["predicted_price"],
-                confidence_low_80=p["confidence_low_80"],
-                confidence_high_80=p["confidence_high_80"],
-                confidence_low_95=p["confidence_low_95"],
-                confidence_high_95=p["confidence_high_95"],
-                model_version="ensemble_v1",
+                predicted_price=round(p["predicted_price"], 2),
+                confidence_low_80=round(p["confidence_low_80"], 2),
+                confidence_high_80=round(p["confidence_high_80"], 2),
+                confidence_low_95=round(p["confidence_low_95"], 2),
+                confidence_high_95=round(p["confidence_high_95"], 2),
+                model_version="ensemble_v1_inr",
                 prediction_method="ml",
                 features_used=json.dumps({
                     "current_price": current_price,
                     "date": latest_date.date().isoformat()
                 })
             )
-            db.add(usd_pred)
+            db.add(inr_pred)
             
-            # Save INR prediction (converted)
-            inr_pred = Prediction(
+            # Save USD prediction (Converted)
+            usd_pred = Prediction(
                 prediction_date=today_date,
                 target_date=target_date,
-                predicted_price=round(p["predicted_price"] * usd_inr_rate, 2),
-                confidence_low_80=round(p["confidence_low_80"] * usd_inr_rate, 2),
-                confidence_high_80=round(p["confidence_high_80"] * usd_inr_rate, 2),
-                confidence_low_95=round(p["confidence_low_95"] * usd_inr_rate, 2),
-                confidence_high_95=round(p["confidence_high_95"] * usd_inr_rate, 2),
-                model_version="ensemble_v1_inr",
+                predicted_price=round(p["predicted_price"] / usd_inr_rate, 2),
+                confidence_low_80=round(p["confidence_low_80"] / usd_inr_rate, 2),
+                confidence_high_80=round(p["confidence_high_80"] / usd_inr_rate, 2),
+                confidence_low_95=round(p["confidence_low_95"] / usd_inr_rate, 2),
+                confidence_high_95=round(p["confidence_high_95"] / usd_inr_rate, 2),
+                model_version="ensemble_v1",
                 prediction_method="ml",
                 features_used=json.dumps({
-                    "current_price": current_price * usd_inr_rate,
+                    "current_price": current_price / usd_inr_rate,
                     "usd_inr_rate": usd_inr_rate,
                     "date": latest_date.date().isoformat()
                 })
             )
-            db.add(inr_pred)
+            db.add(usd_pred)
             
         db.commit()
         logger.info(f"Successfully generated and saved 7-day ML forecasts for USD and INR.")

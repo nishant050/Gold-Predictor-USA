@@ -53,7 +53,7 @@ def get_exchange_rate(db: Session) -> float:
 
 @router.get("/latest")
 def get_latest_predictions(
-    currency: str = Query("USD"),
+    currency: str = Query("INR"),
     db: Session = Depends(get_db)
 ):
     """
@@ -76,7 +76,7 @@ def get_latest_predictions(
     rate = get_exchange_rate(db)
     
     # 1. Fetch ML Predictions
-    ml_model_version = "ensemble_v1" if currency == "USD" else "ensemble_v1_inr"
+    ml_model_version = "ensemble_v1" if currency == "INR" else "ensemble_v1_inr"
     ml_rows = []
     if latest_ml_pred_date:
         ml_rows = db.query(Prediction).filter(
@@ -224,7 +224,7 @@ def run_ml_forecasting_pipeline(db: Session | None = None):
         db = SessionLocal()
 
     try:
-        df_raw = fetch_raw_data(db, currency="USD")
+        df_raw = fetch_raw_data(db, currency="INR")
         df_features = build_features(df_raw)
         
         latest_date = df_features.index.max()
@@ -247,7 +247,7 @@ def run_ml_forecasting_pipeline(db: Session | None = None):
         for p in blended_preds:
             target_date = today_date + timedelta(days=p["step"])
             
-            # Save USD
+            # Save INR
             db.add(Prediction(
                 prediction_date=today_date,
                 target_date=target_date,
